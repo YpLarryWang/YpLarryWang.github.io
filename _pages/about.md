@@ -7,26 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-  <div style="flex: 1;">
-<p>
 🧑🏻‍💻 I'm a final year graduate student at Beijing Normal University, majoring in computational linguistics.
-</p>
-<p>
-🔬 My research interests include the interpretability of neural language models and NLP applications in education, such as automated essay assessment.
-</p>
-<p>
-📚 I am currently working towards my Master’s Thesis on the interpretability of neural language models used for automated essay assessment.
-</p>
-<p>
-📽️ I am also interested in assisting others on their journey into the world of machine learning and natural language processing.
-</p>
 
-  </div>
-  <div style="flex: 0 0 200px;">
-    <img src="../images/me_thump_up.jpg" alt="caption" style="width: 100%; height: auto; border-radius: 25px;">
-  </div>
-</div>
+🔬 My research interests include the interpretability of neural language models and NLP applications in education, such as automated essay assessment.
+
+🎓 I previously studied information and computing science at Beijing Jiaotong University.
+
+💻 I worked as an NLP intern at Cummins China from Mar 2022 to Jun 2022 and at Baidu Financial from Dec 2023 to Mar 2024.
 
 # Selected Experience
 
