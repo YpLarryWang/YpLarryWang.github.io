@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Yupei's Homepage"
+title                    : "Yupei Wang"
 title_separator          : "-"
 name                     : &name "Yupei Wang"
 description              : &description "personal description"
@@ -25,7 +25,7 @@ author:
   name             : "Yupei Wang"
   pronouns         : # example: "she/her"  
   bio              : "Interested in Interpretability of language models."
-  location         : "Beijing,China"
+  location         : "Beijing, China"
   employer         : "Beijing Normal University"
   uri              : # URL
   email            : "wangyupei@mail.bnu.edu.cn" 
@@ -43,7 +43,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "https://github.com/YpLarryWang?tab=packages"
+  github           : "YpLarryWang"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
