@@ -21,7 +21,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "../images/me_cartoon.JPEG"
   name             : "Yupei Wang"
   pronouns         : # example: "she/her"  
   bio              : "Computational Linguistics under Prof. Renfen Hu"

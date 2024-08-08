@@ -9,14 +9,18 @@ redirect_from:
 
 <div style="display: flex; align-items: flex-start; gap: 20px;">
   <div style="flex: 1;">
-
+<p>
 🧑🏻‍💻 I'm a final year graduate student at Beijing Normal University, majoring in computational linguistics.
-
+</p>
+<p>
 🔬 My research interests include the interpretability of neural language models and NLP applications in education, such as automated essay assessment.
-
+</p>
+<p>
 📚 I am currently working towards my Master’s Thesis on the interpretability of neural language models used for automated essay assessment.
-
+</p>
+<p>
 📽️ I am also interested in assisting others on their journey into the world of machine learning and natural language processing.
+</p>
 
   </div>
   <div style="flex: 0 0 200px;">
