@@ -11,7 +11,7 @@ redirect_from:
 
 🔬 My research interests include the interpretability of neural language models and NLP applications in education, such as automated essay assessment.
 
-🎓 I previously studied information and computing science at Beijing Jiaotong University.
+📚 I previously studied information and computing science at Beijing Jiaotong University.
 
 💻 I worked as an NLP intern at Cummins China from Mar 2022 to Jun 2022 and at Baidu Financial from Dec 2023 to Mar 2024.
 
