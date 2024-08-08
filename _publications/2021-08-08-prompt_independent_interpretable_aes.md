@@ -2,10 +2,10 @@
 title: "A Prompt-Independent and Interpretable Automated Essay Scoring Method for Chinese Second Language Writing"
 collection: publications
 permalink: /publication/2021-08-08-prompt_independent_interpretable_aes.md
-excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
+excerpt: 'The source code of the project is available at [GitHub](https://github.com/iris2hu/L2C-rater), and a demo of the project is available at [Demo](https://l2c.shenshen.wiki/).'
 date: 2021-08-08
 venue: 'Lecture Notes in Artificial Intelligence'
-slidesurl: 'https://aclanthology.org/2021.ccl-1.107.pdf'
+slidesurl: '../files/slides-2021ccl-1-107.pdf'
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
 citation: 'Wang, Y., & Hu, R. (2021, August). A prompt-independent and interpretable automated essay scoring method for Chinese second language writing. In China National Conference on Chinese Computational Linguistics (pp. 450-470). Cham: Springer International Publishing.'
 ---
