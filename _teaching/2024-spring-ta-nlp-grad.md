@@ -8,7 +8,7 @@ date: 2024-07-15
 location: "Beijing, China"
 ---
 
-Serving as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s Natural Language Processing course.
+Serving as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *Natural Language Processing* course.
 
 My responsibilities included:
 

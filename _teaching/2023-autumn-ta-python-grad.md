@@ -8,7 +8,7 @@ date: 2023-12-15
 location: "Beijing, China"
 ---
 
-Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *Object-Oriented Programmingand Natural Language Processing* course. 
+Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *Object-Oriented Programming and Natural Language Processing* course. 
 
 My responsibilities included:
 
