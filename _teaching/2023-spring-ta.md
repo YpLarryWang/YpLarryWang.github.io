@@ -2,7 +2,7 @@
 title: "TA for Python Programming and Data Analysis"
 collection: teaching
 type: "Undergraduate course"
-permalink: /teaching/2023-2024-spring-ta.md
+permalink: /teaching/2023-spring-ta.md
 venue: "Beijing Normal University"
 date: 2023-07-15
 location: "Beijing, China"

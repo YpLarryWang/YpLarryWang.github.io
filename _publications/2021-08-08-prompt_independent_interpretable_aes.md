@@ -1,7 +1,7 @@
 ---
 title: "A Prompt-Independent and Interpretable Automated Essay Scoring Method for Chinese Second Language Writing"
 collection: publications
-permalink: /publication/2021-08-08-prompt_independent_interpretable_aes.md
+permalink: /publication/2021-08-08-prompt_independent_interpretable_aes
 excerpt: 'The source code of the project is available at [GitHub](https://github.com/iris2hu/L2C-rater), and a demo of the project is available at [Demo](https://l2c.shenshen.wiki/).'
 date: 2021-08-08
 venue: 'Lecture Notes in Artificial Intelligence'
