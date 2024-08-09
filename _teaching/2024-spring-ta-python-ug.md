@@ -1,8 +1,8 @@
 ---
 title: "TA for *Python Programming and Data Analysis*"
 collection: teaching
-type: "Undergraduate course"
-permalink: /teaching/2024-spring-ta
+type: "Undergraduate Course (Spring)"
+permalink: /teaching/2024-spring-ta-python-ug
 venue: "Beijing Normal University"
 date: 2024-07-15
 location: "Beijing, China"

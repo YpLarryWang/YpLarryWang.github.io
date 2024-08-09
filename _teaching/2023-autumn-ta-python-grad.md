@@ -1,8 +1,8 @@
 ---
-title: "TA for *Object-Oriented Programmingand Natural Language Processing*"
+title: "TA for *Object-Oriented Programming and Natural Language Processing*"
 collection: teaching
-type: "Graduate course"
-permalink: /teaching/2023-autumn-ta
+type: "Graduate Course (Autumn)"
+permalink: /teaching/2023-autumn-ta-python-grad
 venue: "Beijing Normal University"
 date: 2023-12-15
 location: "Beijing, China"

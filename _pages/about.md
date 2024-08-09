@@ -9,6 +9,6 @@ redirect_from:
 
 📚 I'm a final year graduate student in computational linguistics at Beijing Normal University and I graduated with my B.Sc. in information and computing science from the School of Mathematics and Statistics at Beijing Jiaotong University. 
 
-🔬 I am interested in the internal mechanisms of neural language models and their decision-making processes. My research explores the similarities and differences between these mechanisms and human decision-making. I have examined how well the decision-making criteria of language models, including LLMs, align with human rubrics in automated essay assessment. Additionally, I have developed interpretable scoring algorithms for Chinese essays in the HSK exam, achieving high consistency with human raters.
+🔬 I am interested in the internal mechanisms of neural language models and their decision-making processes. My research investigates how these models' evaluation criteria align with human rubrics in automated essay assessment. I have analyzed the extent to which language models, including LLMs, adhere to human standards when scoring essays. Additionally, I have developed interpretable scoring algorithms for Chinese essays in the HSK exam, achieving high consistency with human raters.
 
 💻 I also worked as an NLP intern at Cummins China from Mar 2022 to Jun 2022 and at Baidu Financial from Dec 2023 to Mar 2024.

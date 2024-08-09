@@ -2,7 +2,7 @@
 title: "A Prompt-Independent and Interpretable Automated Essay Scoring Method for Chinese Second Language Writing"
 collection: publications
 permalink: /publication/2021-08-08-prompt_independent_interpretable_aes
-excerpt: 'We introduce an automated essay scoring method for Chinese as a second language, specifically for HSK test essays, combining linguistic features and ordinal logistic regression to achieve high performance and provide interpretability, offering potential for automated HSK essay scoring and writing feedback. The source code of the project is available at [GitHub](https://github.com/iris2hu/L2C-rater), and a demo of the project is available at [Demo](https://l2c.shenshen.wiki/).'
+excerpt: 'We propose a method for automated scoring of Chinese L2 essays, specifically HSK test essays, using 90 linguistic features and an Ordinal Logistic Regression model, achieving high accuracy and offering insights for writing feedback. The source code of the project is available at [GitHub](https://github.com/iris2hu/L2C-rater), and a demo of the project is available at [Demo](https://l2c.shenshen.wiki/).'
 date: 2021-08-08
 venue: 'Lecture Notes in Artificial Intelligence'
 slidesurl: '../files/slides-2021ccl-1-107.pdf'
