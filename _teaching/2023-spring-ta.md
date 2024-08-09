@@ -1,5 +1,5 @@
 ---
-title: "TA for Python Programming and Data Analysis"
+title: "TA for *Python Programming and Data Analysis*"
 collection: teaching
 type: "Undergraduate course"
 permalink: /teaching/2023-spring-ta
@@ -8,7 +8,7 @@ date: 2023-07-15
 location: "Beijing, China"
 ---
 
-Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s Python programming and machine learning course. 
+Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *Python Programming and Data Analysis* course, covering fundamental knowledge of Python programming, data analysis, and machine learning.
 
 My responsibilities included:
 

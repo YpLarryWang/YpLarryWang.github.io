@@ -1,5 +1,5 @@
 ---
-title: "TA for Python Programming and Data Analysis"
+title: "TA for *Python Programming and Data Analysis*"
 collection: teaching
 type: "Undergraduate course"
 permalink: /teaching/2024-spring-ta
@@ -8,9 +8,10 @@ date: 2024-07-15
 location: "Beijing, China"
 ---
 
-Continued serving as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s Python programming and data analysis course. 
+Continued serving as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *Python Programming and Data Analysis* course. 
 
-My responsibilities similar to 2023, with additional focus on:
+My responsibilities included:
 
-• Introducing large language models to the curriculum, including a dedicated tutorial on using [sample code](https://github.com/YpLarryWang/nlp-tasks-examples-icip/tree/main/llm-api) to run APIs
-• Providing and demonstrating sample code for students to easily interact with large language model APIs
+- Conducting 4 tutorial sessions on applying Python to machine learning and data analysis
+- Organizing a Kaggle competition for hands-on learning and course assessment
+- Introduced large language models into the curriculum with a dedicated tutorial session, where I provided and demonstrated [sample code](https://github.com/YpLarryWang/nlp-tasks-examples-icip/tree/main/llm-api) for interacting with APIs
