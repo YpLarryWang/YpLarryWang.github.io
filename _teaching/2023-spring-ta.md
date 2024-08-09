@@ -13,6 +13,6 @@ Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *P
 My responsibilities included:
 
 - Conducting 4 tutorial sessions on applying Python to machine learning and data analysis
-- Organizing a Kaggle competition for hands-on learning and course assessment
+- Organizing a [Kaggle competition](https://www.kaggle.com/competitions/loan-status-binary-classification) for hands-on learning and course assessment
 
 Collaborated with fellow TA [Zhaoji Wang](https://www.linkedin.com/in/zhaoji-wang/) to support undergraduate students in bridging theory and practice.
