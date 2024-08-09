@@ -12,7 +12,7 @@ Served as a teaching assistant for Professor [Renfen Hu](http://irishu.cn/)'s *O
 
 My responsibilities included:
 
-- Conducting 4 tutorial sessions on applying Python to machine learning and data analysis
+- Conducting 4 tutorial sessions on applying Python to machine learning and basic natural language processing tasks
 - Organizing a [Kaggle competition](https://www.kaggle.com/competitions/icip-aes-2023) for hands-on learning and course assessment
 
 Collaborated with fellow TA [Zhaoji Wang](https://www.linkedin.com/in/zhaoji-wang/) to support graduate students in getting on the right track with their computational linguistics studies.
