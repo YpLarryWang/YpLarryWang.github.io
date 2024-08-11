@@ -6,7 +6,7 @@ excerpt: "This project introduces a model-agnostic diagnostic method using diver
 collection: portfolio
 ---
 
-***Yupei Wang** and Renfen Hu*
+***Yupei Wang**, Renfen Hu, and Zhe Zhao*
 
 As Automated Essay Scoring (AES) systems become increasingly prevalent in education, understanding their decision-making processes is crucial. Therefore, we introduces a novel approach to diagnose and interpret neural-based AES models using counterfactual interventions powered by Large Language Models (LLMs).
 
