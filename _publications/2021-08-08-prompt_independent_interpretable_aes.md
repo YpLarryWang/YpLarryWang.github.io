@@ -6,7 +6,7 @@ excerpt: 'We propose a method for automated scoring of Chinese L2 essays, specif
 date: 2021-08-08
 venue: 'Lecture Notes in Artificial Intelligence'
 slidesurl: '../files/slides-2021ccl-1-107.pdf'
-paperurl: 'http://academicpages.github.io/files/paper1.pdf'
+paperurl: 'https://aclanthology.org/2021.ccl-1.107v2.pdf'
 citation: 'Wang, Y., & Hu, R. (2021, August). A prompt-independent and interpretable automated essay scoring method for Chinese second language writing. In China National Conference on Chinese Computational Linguistics (pp. 450-470). Cham: Springer International Publishing.'
 ---
 
