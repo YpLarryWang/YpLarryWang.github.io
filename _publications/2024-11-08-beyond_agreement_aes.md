@@ -5,8 +5,8 @@ permalink: /publication/2024-11-08-beyond_agreement_aes
 excerpt: 'We propose a counterfactual intervention method using Large Language Models (LLMs) to reveal that, in automated essay scoring, while BERT-like models focus on sentence-level features, LLMs align more comprehensively with scoring rubrics by emphasizing conventions, accuracy, language complexity, and organization. The source code and data of this paper is available at [GitHub](https://github.com/YpLarryWang/beyond-agreement-aes-2024).'
 date: 2024-11-08
 venue: 'ACL Anthology: Findings of EMNLP 2024'
-slidesurl: '../files/FIND1859-SLIDES-EMNLP2024.pdf'
-paperurl: 'https://drive.google.com/file/d/1t9jSPJVNJMXSfXD5MwwQ-4GSGV4Gg8dS/view?usp=drive_link'
+slidesurl: 'https://drive.google.com/file/d/1t9jSPJVNJMXSfXD5MwwQ-4GSGV4Gg8dS/view?usp=drive_link'
+paperurl: 'https://aclanthology.org/2024.findings-emnlp.520.pdf'
 citation: 'Yupei Wang, Renfen Hu, and Zhe Zhao. 2024. Beyond Agreement: Diagnosing the Rationale Alignment of Automated Essay Scoring Methods based on Linguistically-informed Counterfactuals. In Findings of the Association for Computational Linguistics: EMNLP 2024, pages 8906–8925, Miami, Florida, USA. Association for Computational Linguistics.'
 ---
 
