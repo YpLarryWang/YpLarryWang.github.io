@@ -6,7 +6,7 @@ excerpt: 'We propose a counterfactual intervention method using Large Language M
 date: 2024-11-08
 venue: 'ACL Anthology: Findings of EMNLP 2024'
 slidesurl: '../files/FIND1859-SLIDES-EMNLP2024.pdf'
-paperurl: 'https://aclanthology.org/2024.findings-emnlp.520.pdf'
+paperurl: 'https://drive.google.com/file/d/1t9jSPJVNJMXSfXD5MwwQ-4GSGV4Gg8dS/view?usp=drive_link'
 citation: 'Yupei Wang, Renfen Hu, and Zhe Zhao. 2024. Beyond Agreement: Diagnosing the Rationale Alignment of Automated Essay Scoring Methods based on Linguistically-informed Counterfactuals. In Findings of the Association for Computational Linguistics: EMNLP 2024, pages 8906–8925, Miami, Florida, USA. Association for Computational Linguistics.'
 ---
 
