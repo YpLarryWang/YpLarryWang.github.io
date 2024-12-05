@@ -9,6 +9,10 @@ redirect_from:
 
 📚 I'm a final year graduate student in Computational Linguistics at Beijing Normal University and I graduated with my B.Sc. in Information and Computation Science from the School of Mathematics and Statistics at Beijing Jiaotong University. 
 
-🔬 I am interested in the internal mechanisms of neural language models and their decision-making processes. My research investigates how these models' evaluation criteria align with human rubrics in automated essay assessment. I have analyzed the extent to which language models, including LLMs, adhere to human standards when scoring essays. Additionally, I have developed interpretable scoring algorithms for Chinese essays in the HSK exam, achieving high consistency with human raters.
+🔬 My research interests lie in the scientific aspects of intelligent systems, particularly human brains and deep neural networks (DNNs). This interest encompasses two complementary perspectives:
+
+1. **Model Interpretability**: DNNs offer the unique advantage of allowing us to observe and manipulate their internal states. This enables us to investigate how both concrete and abstract concepts, along with their relationships, emerge from the vast parameter space of DNNs, and how these networks perform reasoning based on these implicit concepts.
+
+2. **Models as Cognitive Prototypes**: Neural models can serve as testable prototypes for exploring hypotheses about human cognition. For instance, we can use DNNs to examine whether efficient multimodal information integration is key to children's efficient language acquisition under the *Poverty of the Stimulus* hypothesis. Such studies not only advance our understanding of human learning, but also provide insights into improving data efficiency in training multimodal neural models.
 
 💻 I also worked as an NLP intern at Cummins China from Mar 2022 to Jun 2022 and at Baidu Financial from Dec 2023 to Mar 2024.
