@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-📚 I'm a final year graduate student in Computational Linguistics at Beijing Normal University and I graduated with my B.Sc. in Information and Computation Science from the School of Mathematics and Statistics at Beijing Jiaotong University. 
+📚 I'm a final year Master's student in Computational Linguistics at Beijing Normal University and I graduated with my B.Sc. in Information and Computation Science from the School of Mathematics and Statistics at Beijing Jiaotong University. 
 
 🔬 My research interests lie in the scientific aspects of intelligent systems, particularly human brains and deep neural networks (DNNs). This interest encompasses two complementary perspectives:
 
