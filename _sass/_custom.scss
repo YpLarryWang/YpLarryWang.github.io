@@ -3,7 +3,8 @@
       position: relative;
       
       &:hover .dropdown-menu {
-        display: block;
+        display: flex;
+        flex-direction: column; // 确保垂直排列
       }
     }
   
@@ -12,7 +13,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      padding: 0;
+      padding: 5px 0;
       margin: 0;
       background: #fff;
       min-width: 200px;
@@ -24,11 +25,15 @@
         margin: 0;
         padding: 0;
         white-space: nowrap;
+        display: block; // 确保垂直排列
+        width: 100%; // 确保全宽
+        font-weight: normal; // 取消粗体
         
         a {
           display: block;
           padding: 8px 15px;
           border-bottom: 1px solid #f2f3f3;
+          font-weight: normal; // 取消粗体
           
           &:hover {
             background: #f2f3f3;
