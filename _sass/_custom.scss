@@ -3,8 +3,7 @@
       position: relative;
       
       &:hover .dropdown-menu {
-        display: flex;
-        flex-direction: column; // 确保垂直排列
+        display: block;
       }
     }
   
@@ -20,20 +19,22 @@
       border: 1px solid #f2f3f3;
       border-radius: 4px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-direction: column;
       
       li {
+        display: block;
+        width: 100%;
         margin: 0;
         padding: 0;
         white-space: nowrap;
-        display: block; // 确保垂直排列
-        width: 100%; // 确保全宽
-        font-weight: normal; // 取消粗体
+        font-weight: normal;
         
         a {
           display: block;
+          width: 100%;
           padding: 8px 15px;
+          font-weight: normal;
           border-bottom: 1px solid #f2f3f3;
-          font-weight: normal; // 取消粗体
           
           &:hover {
             background: #f2f3f3;
@@ -45,4 +46,22 @@
         }
       }
     }
+  }
+  
+  // 强制覆盖水平布局
+  .greedy-nav .visible-links {
+    .dropdown-menu {
+      display: none;
+      flex-direction: column !important;
+      
+      li {
+        float: none !important;
+        display: block !important;
+      }
+    }
+  }
+  
+  // 确保下拉菜单显示时是垂直的
+  .greedy-nav .visible-links li:hover .dropdown-menu {
+    display: block !important;
   }
