@@ -1,5 +1,12 @@
 # main links links
 main:
+  - title: "Docs"
+  children:
+    - title: "CV"
+      url: ../files/Curriculum_Vitae.pdf
+    - title: "Research Statement"
+      url: ../files/Research_Statement.pdf
+
   - title: "Publications"
     url: /publications/
 
@@ -11,13 +18,6 @@ main:
 
   - title: "Teaching"
     url: /teaching/
-
-  - title: "Documents"
-  children:
-    - title: "CV"
-      url: ../files/CV_20241227.pdf
-    - title: "Research Statement"
-      url: ../files/Research_Statement.pdf
         
   # - title: "Blog Posts"
   #   url: /year-archive/
