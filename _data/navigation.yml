@@ -1,26 +1,26 @@
 # main links links
 main:
-  - title: "Docs"
-  children:
-    - title: "CV"
-      url: ../files/Curriculum_Vitae.pdf
-    - title: "Research Statement"
-      url: ../files/Research_Statement.pdf
-
-  - title: "Publications"
-    url: /publications/
-
-  # - title: "Talks"
-  #   url: /talks/    
-
-  - title: "Portfolio"
-    url: /portfolio/
-
-  - title: "Teaching"
-    url: /teaching/
-        
-  # - title: "Blog Posts"
-  #   url: /year-archive/
-    
-  # - title: "Guide"
-  #   url: /markdown/
+    - title: "Docs"
+      children:
+        - title: "CV"
+          url: ../files/Curriculum_Vitae.pdf
+        - title: "Research Statement"
+          url: ../files/Research_Statement.pdf
+  
+    - title: "Publications"
+      url: /publications/
+  
+    # - title: "Talks"
+    #   url: /talks/    
+  
+    - title: "Portfolio"
+      url: /portfolio/
+  
+    - title: "Teaching"
+      url: /teaching/
+          
+    # - title: "Blog Posts"
+    #   url: /year-archive/
+      
+    # - title: "Guide"
+    #   url: /markdown/
