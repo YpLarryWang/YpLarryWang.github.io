@@ -1,0 +1,43 @@
+.greedy-nav {
+    .dropdown {
+      position: relative;
+      
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+  
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 0;
+      margin: 0;
+      background: #fff;
+      min-width: 200px;
+      border: 1px solid #f2f3f3;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      
+      li {
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        
+        a {
+          display: block;
+          padding: 8px 15px;
+          border-bottom: 1px solid #f2f3f3;
+          
+          &:hover {
+            background: #f2f3f3;
+          }
+        }
+        
+        &:last-child a {
+          border-bottom: none;
+        }
+      }
+    }
+  }
