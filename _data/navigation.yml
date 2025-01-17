@@ -1,11 +1,13 @@
 # main links links
 main:
-    - title: "Docs"
-      children:
-        - title: "CV"
-          url: ../files/Curriculum_Vitae.pdf
-        - title: "Research Statement"
-          url: ../files/Research_Statement.pdf
+    - title: "CV"
+      url: ../files/Curriculum_Vitae.pdf
+    # - title: "Docs"
+    #   children:
+    #     - title: "CV"
+    #       url: ../files/Curriculum_Vitae.pdf
+    #     - title: "Research Statement"
+    #       url: ../files/Research_Statement.pdf
   
     - title: "Publications"
       url: /publications/
