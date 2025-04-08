@@ -1,7 +1,7 @@
 # main links links
 main:
-    - title: "CV"
-      url: ../files/Curriculum_Vitae.pdf
+    # - title: "CV"
+    #   url: ../files/Curriculum_Vitae.pdf
     # - title: "Docs"
     #   children:
     #     - title: "CV"
