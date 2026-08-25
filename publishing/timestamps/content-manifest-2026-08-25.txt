@@ -1,0 +1,46 @@
+# Content manifest -- FV-AGOP blog post
+#
+# The SHA-256 of THIS FILE is what gets timestamped. Each line below
+# pins one constituent file, so a single proof covers the whole bundle.
+# To check a live copy: re-hash each source_path and compare.
+#
+# Scope: prose, evidence figures, data tables, diagram, decorative art.
+# NOT covered: CSS/JS (site-level presentation, changes independently).
+
+manifest-version: 1
+article-id: blog/2026-08-24-function-vectors
+generated: 2026-08-25T02:05:16-07:00
+file-count: 31
+
+# role | figure | bytes | sha256 | site_path | source_path
+data-table | - | 717 | 2e92694890b81b02c888a6849ec91bd2c070a87149fd708cf81169346d0cf0ee | /Blog/2026-08-24-function-vectors/data/fig2_logit.csv | content/Blog/2026-08-24-function-vectors/data/fig2_logit.csv
+data-table | - | 697 | 47d9ef41f27387ce304550498e710e67356549a79b0f56bc4566c236074cd810 | /Blog/2026-08-24-function-vectors/data/fig2_top1.csv | content/Blog/2026-08-24-function-vectors/data/fig2_top1.csv
+data-table | - | 1330 | 0d2722073df473deadedd6bf05cfb9f314163bc1cac52d400b25428991169ce6 | /Blog/2026-08-24-function-vectors/data/fig3_logit.csv | content/Blog/2026-08-24-function-vectors/data/fig3_logit.csv
+data-table | - | 1307 | d68bf60669a0798c26d876c3c18b463cce59ad7d7ec4320a8c0f5b0b09b76646 | /Blog/2026-08-24-function-vectors/data/fig3_top1.csv | content/Blog/2026-08-24-function-vectors/data/fig3_top1.csv
+data-table | - | 1316 | e2bd3863ed771c90403af6279831db668d132a54cb9bf4d5d284ee9f110e4edd | /Blog/2026-08-24-function-vectors/data/fig4_alignment.csv | content/Blog/2026-08-24-function-vectors/data/fig4_alignment.csv
+data-table | - | 1306 | aba619fbdaecb8468509af769f8f1255b1edd1945706da2b583796d290f69680 | /Blog/2026-08-24-function-vectors/data/fig5_alignment.csv | content/Blog/2026-08-24-function-vectors/data/fig5_alignment.csv
+data-table | - | 532 | 30dff33150e41fc13d437b09bd4be26cc6835309ef8c9dc01c38856cc1372acf | /Blog/2026-08-24-function-vectors/data/fig6_energy.csv | content/Blog/2026-08-24-function-vectors/data/fig6_energy.csv
+data-table | - | 281 | ef337a0890ecdf8e305bcaaad267fcf46847ce3076ff26755e5c60037ba006a1 | /Blog/2026-08-24-function-vectors/data/fig7_ksweep.csv | content/Blog/2026-08-24-function-vectors/data/fig7_ksweep.csv
+data-table | - | 682 | 8fbf8a38c172c92d10862baea15528c151deea082c636fcd488962358e304533 | /Blog/2026-08-24-function-vectors/data/fig8_logit.csv | content/Blog/2026-08-24-function-vectors/data/fig8_logit.csv
+data-table | - | 673 | 83bf37ac6273ce4a10ec2ae809e10d1d05f31e6d0cdac9828f973666ee91739e | /Blog/2026-08-24-function-vectors/data/fig8_top1.csv | content/Blog/2026-08-24-function-vectors/data/fig8_top1.csv
+data-table | - | 1976 | 2da6cffeb907dce8687d787561c143f59458302fabdf2e98baddafcd7fe11479 | /Blog/2026-08-24-function-vectors/data/fig9_advantage.csv | content/Blog/2026-08-24-function-vectors/data/fig9_advantage.csv
+decorative | - | 255438 | 4c9121972775bc29ef94cd130083d37597226e29f12e1199c7148a9da8dce8a6 | /imgs/pavilion-bridge-handdrawn-ivory.webp | content/imgs/pavilion-bridge-handdrawn-ivory.webp
+diagram | Figure 1 | 70707 | 3d7b37fdaa5a178147b917271c7c16b32ff1a40aedafe2c735729721d4b48ed4 | /Blog/2026-08-24-function-vectors/figures/tri-ortho-decomposition.png | content/Blog/2026-08-24-function-vectors/figures/tri-ortho-decomposition.png
+diagram | Figure 1 | 6524 | 7e70e59a73b50dff1f6a73fdb388cdd5f3c13b6daf572e0e6c292da087ea08a2 | /Blog/2026-08-24-function-vectors/figures/tri-ortho-decomposition.svg | content/Blog/2026-08-24-function-vectors/figures/tri-ortho-decomposition.svg
+evidence-figure | Figure 4 | 160422 | 561256c5489ce8840acf404964eb368bec1fb41e911ba8a6f2d6be70ecfb609a | /Blog/2026-08-24-function-vectors/figures/agop_alignment.png | content/Blog/2026-08-24-function-vectors/figures/agop_alignment.png
+evidence-figure | Figure 4 | 72874 | 52525ba6f313bf4b4a79c79a9de2a1a823a15627bc107be47045a03bd765bf24 | /Blog/2026-08-24-function-vectors/figures/agop_alignment.svg | content/Blog/2026-08-24-function-vectors/figures/agop_alignment.svg
+evidence-figure | Figure 2 | 146914 | 315371a92cb2b67c411b7ede6e61004fd97f85cf33c547d760e6ad3f72a2023d | /Blog/2026-08-24-function-vectors/figures/causal_efficacy.png | content/Blog/2026-08-24-function-vectors/figures/causal_efficacy.png
+evidence-figure | Figure 2 | 106069 | 5ad26454e07544bfcdd2d41cd7ea85835ba189578d9bcf7369cb06e9c9a12551 | /Blog/2026-08-24-function-vectors/figures/causal_efficacy.svg | content/Blog/2026-08-24-function-vectors/figures/causal_efficacy.svg
+evidence-figure | Figure 8 | 184425 | add94a811332216bb441698a84ac1900b6239f5ce1810ee8aefe6fb99b1fded2 | /Blog/2026-08-24-function-vectors/figures/component_causal_effect.png | content/Blog/2026-08-24-function-vectors/figures/component_causal_effect.png
+evidence-figure | Figure 8 | 116232 | fc7b7d099b6b9982aac0888e62c666d1b85ec1054e6dee0ceb200a711c0a2a1c | /Blog/2026-08-24-function-vectors/figures/component_causal_effect.svg | content/Blog/2026-08-24-function-vectors/figures/component_causal_effect.svg
+evidence-figure | Figure 5 | 217657 | e055c0ea361574b0a91f9e6c7e32092ea4a0d454c8309f98338d8b47eb0a97ab | /Blog/2026-08-24-function-vectors/figures/crosstask_agop_alignment.png | content/Blog/2026-08-24-function-vectors/figures/crosstask_agop_alignment.png
+evidence-figure | Figure 5 | 74660 | b1312e19b7e1a82d05089d64adc42fc813ae5955f18736dc9d331efc3c2f37c6 | /Blog/2026-08-24-function-vectors/figures/crosstask_agop_alignment.svg | content/Blog/2026-08-24-function-vectors/figures/crosstask_agop_alignment.svg
+evidence-figure | Figure 3 | 199788 | c9665b8dbefd5062cb43513a6cdc7c01875c05f9512615f2e4341889dd3e19e3 | /Blog/2026-08-24-function-vectors/figures/crosstask_causal_efficacy.png | content/Blog/2026-08-24-function-vectors/figures/crosstask_causal_efficacy.png
+evidence-figure | Figure 3 | 119712 | 29859dd9994a5e1599c6975d07e9e664ae955cd90609b43063ba04386d7a9728 | /Blog/2026-08-24-function-vectors/figures/crosstask_causal_efficacy.svg | content/Blog/2026-08-24-function-vectors/figures/crosstask_causal_efficacy.svg
+evidence-figure | Figure 9 | 102493 | 904a321915771924034f7be02edc98f7305097a4fdd55feab47a45a6b68a227b | /Blog/2026-08-24-function-vectors/figures/crosstask_component_advantage.png | content/Blog/2026-08-24-function-vectors/figures/crosstask_component_advantage.png
+evidence-figure | Figure 9 | 64777 | 062bf904bca0a4ce36a51f2f0fcbe167b046fe7eb9254b9b24bc2673e83c8d3e | /Blog/2026-08-24-function-vectors/figures/crosstask_component_advantage.svg | content/Blog/2026-08-24-function-vectors/figures/crosstask_component_advantage.svg
+evidence-figure | Figure 6 | 121537 | b926b2b659e537c358f264d8e17582ef3ef3b578809bf8f429fb1bb23df48c43 | /Blog/2026-08-24-function-vectors/figures/energy_decomposition.png | content/Blog/2026-08-24-function-vectors/figures/energy_decomposition.png
+evidence-figure | Figure 6 | 81596 | cdd92b09932e75e5686c1b0901f746a37e64b641c7a9f4a6678b0d65a2364758 | /Blog/2026-08-24-function-vectors/figures/energy_decomposition.svg | content/Blog/2026-08-24-function-vectors/figures/energy_decomposition.svg
+evidence-figure | Figure 7 | 87136 | 4c3b2fa24f28e5ea6a1ce8c61e536b9e205efd972873afba05c81e02e1c7feda | /Blog/2026-08-24-function-vectors/figures/k_sweep_enrichment.png | content/Blog/2026-08-24-function-vectors/figures/k_sweep_enrichment.png
+evidence-figure | Figure 7 | 46419 | cf1e0f110968add023e75754e16dfb7cd30a5537f3fd47b23f684075f3b627a9 | /Blog/2026-08-24-function-vectors/figures/k_sweep_enrichment.svg | content/Blog/2026-08-24-function-vectors/figures/k_sweep_enrichment.svg
+prose | - | 44899 | db060d7554794223ae15bfa3e80c148140aa4e4304ec1cfb92b8d1b17ee7edef | /Blog/2026-08-24-function-vectors/index.typ | content/Blog/2026-08-24-function-vectors/index.typ
