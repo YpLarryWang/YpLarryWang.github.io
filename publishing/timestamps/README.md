@@ -68,3 +68,29 @@ diff <(sort content-manifest-2026-08-25.txt) <(sort content-manifest-<later>.txt
 **If any of those 30 lines has moved, that is not a normal difference — it
 means content changed and must be investigated before trusting either proof.**
 Valla will run this comparison and treat any other change as a blocker.
+
+### Prediction revised 2026-08-25, before the slug rename
+
+The prediction above said exactly one line would differ. **That is no longer
+right, and the reason is recorded here rather than quietly corrected later.**
+
+After it was written, the owner chose a new slug (`fv-agop-dev-interp`, no date).
+The manifest pins both `site_path` and `source_path`, so renaming the directory
+changes **all 31 lines** — every path moves, even though no content does.
+
+The check therefore shifts from lines to **hashes**, which is the stronger form:
+
+- compare the `sha256` column only, ignoring the path columns
+- **30 of 31 hashes must be byte-identical** — prose, formulas, numbers,
+  figures, data tables, diagrams
+- **only `index.typ` may differ**, and only because publishing writes the
+  publication time and `citation_*` metadata into it
+
+```
+cut -d'|' -f4 manifest_a | sort > /tmp/a
+cut -d'|' -f4 manifest_b | sort > /tmp/b
+diff /tmp/a /tmp/b        # expect exactly one differing hash
+```
+
+A rename moves content; it does not alter it. If any hash beyond `index.typ`
+has moved, content changed and that is a blocker.
