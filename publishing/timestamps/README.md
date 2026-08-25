@@ -37,3 +37,34 @@ the live content is the content that was stamped.
 
 Proves: this exact content existed **no later than** the block time.
 Does not prove: when it was created, or that it was not public earlier.
+
+## Why there will be two proofs
+
+Publishing necessarily edits the article: the real publication time,
+`citation_*` metadata and possibly `og:url` are written at go-live. That
+changes `index.typ`, so the manifest hash changes too. This is caused by the
+act of publishing, not by an undisclosed edit.
+
+Two proofs therefore exist, each answering a different question:
+
+| Proof | Proves |
+|---|---|
+| `content-manifest-2026-08-25` (this one) | the content existed **before publication** — a claim that cannot be reconstructed once the post is public |
+| the post-publication stamp (later) | the version that is **actually public** |
+
+### The difference must be checkable, not merely asserted
+
+Written **before** the second proof exists, so it is a prediction rather than
+an after-the-fact explanation. Comparing the two manifests line by line:
+
+- **exactly one line should differ — `index.typ`**
+- the other **30 lines must be byte-identical**: prose, formulas, numbers,
+  figures, data tables and diagrams are untouched by publishing
+
+```
+diff <(sort content-manifest-2026-08-25.txt) <(sort content-manifest-<later>.txt)
+```
+
+**If any of those 30 lines has moved, that is not a normal difference — it
+means content changed and must be investigated before trusting either proof.**
+Valla will run this comparison and treat any other change as a blocker.
