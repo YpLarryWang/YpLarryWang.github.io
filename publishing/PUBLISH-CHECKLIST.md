@@ -12,7 +12,7 @@ Preview: `uv run build.py preview --no-open` → http://127.0.0.1:8000
 
 | # | Item | Where | Current value |
 |---|---|---|---|
-| 1 | Post date + slug | `content/Blog/<slug>/`, `posts.typ`, `date:` | placeholder `2026-08-24-function-vectors` |
+| 1 | Post date + slug | `content/Blog/<slug>/`, `posts.typ`, `date:` | placeholder `fv-agop-dev-interp` |
 | 2 | ~~Site SEO description~~ | `config.typ` | **DONE** — `Yupei Wang's personal site and blog.` |
 | 3 | ~~Author name~~ | `config.typ` | **DONE** — `Yupei Wang` in all four places |
 | 4 | ~~Sample posts~~ | `content/Blog/_2024-*`, `_2025-*` | **DONE** — underscore-prefixed, excluded from build, URLs 404 |

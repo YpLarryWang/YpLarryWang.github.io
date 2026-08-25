@@ -94,3 +94,29 @@ diff /tmp/a /tmp/b        # expect exactly one differing hash
 
 A rename moves content; it does not alter it. If any hash beyond `index.typ`
 has moved, content changed and that is a blocker.
+
+### This manifest's paths are pre-rename — verify by hash, not by path
+
+**Do not regenerate this manifest.** Regenerating changes its bytes and voids
+the proof, and what it proves — that the content existed *before publication* —
+is the one claim that cannot be recreated later.
+
+The article directory was renamed after stamping:
+
+```
+content/Blog/2026-08-24-function-vectors/   ≡   content/Blog/fv-agop-dev-interp/
+```
+
+So **30 of the 31 listed `source_path`s no longer resolve** (the 31st,
+`content/imgs/pavilion-bridge-handdrawn-ivory.webp`, is outside the article
+directory and is unaffected). This is a move, not a modification. Verified
+2026-08-25: applying the mapping above, **31/31 content hashes are identical on
+disk, 0 mismatched.**
+
+To check this manifest against a later copy of the site, apply the path
+substitution first, then compare the `sha256` column. **A missing path here is
+expected and is not evidence of tampering; a changed hash would be.**
+
+When the second manifest is generated after go-live it will use the new paths,
+so a naive line-by-line diff shows ~30 differing lines. That is the rename, not
+content drift — compare hashes, as described above.

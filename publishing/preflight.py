@@ -27,7 +27,7 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SITE = REPO / "_site"
 CONTENT = REPO / "content"
-POST_DIR = "2026-08-24-function-vectors"
+POST_DIR = "fv-agop-dev-interp"
 
 DASHES = {"−": "-", "–": "-", "—": "-"}
 SIGNED_DECIMAL = re.compile(r"(?<![\d.])-?\d+\.\d+(?![\d])")
