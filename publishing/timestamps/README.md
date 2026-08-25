@@ -120,3 +120,30 @@ expected and is not evidence of tampering; a changed hash would be.**
 When the second manifest is generated after go-live it will use the new paths,
 so a naive line-by-line diff shows ~30 differing lines. That is the rename, not
 content drift — compare hashes, as described above.
+
+## Upgraded 2026-08-25 — both proofs are now self-contained
+
+`ots upgrade` completed for both. Each proof now embeds a Bitcoin block header
+attestation, so verification no longer depends on the calendar servers
+retaining the aggregation path.
+
+| Manifest | SHA-256 | Bitcoin block |
+|---|---|---|
+| `content-manifest-2026-08-25.txt` (pre-publication) | `1b27ca8e…bdbd` | 963984 |
+| `content-manifest-published-2026-08-25.txt` (published) | `451e15be…6442` | 964002 |
+
+The manifest files themselves are unchanged — the proofs bind to those exact
+bytes, so altering a manifest would void its proof.
+
+### Verifying
+
+```
+ots verify content-manifest-2026-08-25.txt.ots
+```
+
+**This requires a local Bitcoin node.** Without one the client cannot check the
+block header and reports a connection error — that is a missing verifier, not a
+bad proof. The attestation is present either way and can be inspected with
+`ots info`, or checked against any Bitcoin block explorer using the block
+heights above.
+
