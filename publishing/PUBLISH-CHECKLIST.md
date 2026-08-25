@@ -1,13 +1,29 @@
 # Go-live checklist — FV/AGOP post
 
-Working document owned by Yuxi. Nothing here may be executed without the
-owner's explicit approval. Last updated 2026-08-25.
+**STATUS 2026-08-25: everything below is DONE except the push itself.**
 
-Site repo: `/Users/yupeiwang/Documents/YpLarryWang.github.io`
-Preview: `uv run build.py preview --no-open` → http://127.0.0.1:8000
+| Item | State |
+|---|---|
+| Slug | **`fv-agop-dev-interp`** (no date), verified across all 4 surfaces, 0 old-slug residue |
+| Prose | **frozen**, `index.typ` = `db060d7554794223ae15bfa3e80c148140aa4e4304ec1cfb92b8d1b17ee7edef` |
+| References | Pythia + OLMo added; `Updated` moved to 2026-08-25 09:01 UTC |
+| Licence | CC BY 4.0 for `content/`, MIT retained for template code |
+| Author | `Yupei Wang` in all four places (2 meta fields, byline, BibTeX) |
+| Privacy | owner's 4 private images gone from disk and never in git history |
+| Sample posts | removed from the build, URLs 404 |
+| Orphan check | **zero** unexplained published files |
+| Timestamp #1 | stamped, manifest `1b27ca8e7a9ab59c636e6667d63d9222d35af0fc5be5c633e7a9e3d28221bdbd`, proof committed, **pending Bitcoin confirmation** (reminder set) |
+| Local commits | `5a5efc0`, `c7feccd`, `29480ed`, `638172b` — all scoped to `publishing/`, nothing pushed |
+
+**REMAINING, in order:**
+1. Owner confirms the date shown on the page (currently `2026-08-24`, the drafting date)
+2. Fill the publication assertions below **in one batch** (setting `post-published` switches the `citation_*` tags on automatically)
+3. Independent audit of those assertions
+4. Branch → push → merge to `main` (merging is what deploys)
+5. Second timestamp covering the published version
+6. Zenodo switch ON **before** creating the Release; then Release → DOI → backfill BibTeX
 
 ---
-
 ## 0. Blocking decisions (owner)
 
 | # | Item | Where | Current value |
