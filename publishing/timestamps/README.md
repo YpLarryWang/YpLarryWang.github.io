@@ -127,10 +127,16 @@ content drift — compare hashes, as described above.
 attestation, so verification no longer depends on the calendar servers
 retaining the aggregation path.
 
-| Manifest | SHA-256 | Bitcoin block |
-|---|---|---|
-| `content-manifest-2026-08-25.txt` (pre-publication) | `1b27ca8e…bdbd` | 963984 |
-| `content-manifest-published-2026-08-25.txt` (published) | `451e15be…6442` | 964002 |
+| Manifest | SHA-256 | Bitcoin block | Block mined (UTC) |
+|---|---|---|---|
+| `content-manifest-2026-08-25.txt` (pre-publication) | `1b27ca8e…bdbd` | 963984 | 2026-08-25 09:50:56 |
+| `content-manifest-published-2026-08-25.txt` (published) | `451e15be…6442` | 964002 | 2026-08-25 12:24:35 |
+
+The post was published at **2026-08-25 11:54 UTC**. Block 963984 was mined
+**09:50:56 UTC**, roughly two hours earlier — so the first proof establishes
+that this content existed *before publication*, which is the one claim that
+cannot be reconstructed after the fact. The block times are given here so a
+reader can see that without looking anything up.
 
 The manifest files themselves are unchanged — the proofs bind to those exact
 bytes, so altering a manifest would void its proof.
@@ -143,7 +149,19 @@ ots verify content-manifest-2026-08-25.txt.ots
 
 **This requires a local Bitcoin node.** Without one the client cannot check the
 block header and reports a connection error — that is a missing verifier, not a
-bad proof. The attestation is present either way and can be inspected with
-`ots info`, or checked against any Bitcoin block explorer using the block
-heights above.
+bad proof.
+
+### What has and has not been checked
+
+Be precise about this, because the two are easy to conflate:
+
+- **Done:** the proofs contain Bitcoin block header attestations (visible via
+  `ots info`), and both block heights were confirmed to exist with the mining
+  times above via a block explorer.
+- **Not done by anyone yet:** the full cryptographic walk from the manifest
+  hash along the Merkle path to the block's merkle root. That needs a Bitcoin
+  node or a dedicated verifier.
+
+So the honest statement is **"independently verifiable"**, not "verified by
+us". Anyone running a node can complete the remaining step.
 
