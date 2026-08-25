@@ -1,27 +1,21 @@
-# Go-live checklist — FV/AGOP post
+# Publishing checklist
 
-**STATUS 2026-08-25: everything below is DONE except the push itself.**
+**STATUS 2026-08-25: the FV/AGOP post is PUBLISHED.**
+<https://ypwang.one/Blog/fv-agop-dev-interp/> — published 2026-08-25 11:54 UTC.
 
 | Item | State |
 |---|---|
-| Slug | **`fv-agop-dev-interp`** (no date), verified across all 4 surfaces, 0 old-slug residue |
-| Prose | **frozen**, `index.typ` = `db060d7554794223ae15bfa3e80c148140aa4e4304ec1cfb92b8d1b17ee7edef` |
-| References | Pythia + OLMo added; `Updated` moved to 2026-08-25 09:01 UTC |
-| Licence | CC BY 4.0 for `content/`, MIT retained for template code |
-| Author | `Yupei Wang` in all four places (2 meta fields, byline, BibTeX) |
-| Privacy | owner's 4 private images gone from disk and never in git history |
-| Sample posts | removed from the build, URLs 404 |
-| Orphan check | **zero** unexplained published files |
-| Timestamp #1 | stamped, manifest `1b27ca8e7a9ab59c636e6667d63d9222d35af0fc5be5c633e7a9e3d28221bdbd`, proof committed, **pending Bitcoin confirmation** (reminder set) |
-| Local commits | `5a5efc0`, `c7feccd`, `29480ed`, `638172b` — all scoped to `publishing/`, nothing pushed |
+| Live | article, `/Blog/`, `/Blog/tags/`, `/` all 200; template CV/Docs/3 samples 404 (11/11 verified against a pre-push baseline) |
+| Prose | frozen, `index.typ` = `5939d6d9c507fb32fe71fe72d57a4447c084faf67f5e37581a57100147c4720a` |
+| Assertions | all publication fields agree with the byline; verified on the live page, not just locally |
+| Timestamps | two OTS proofs committed — `1b27ca8e…` (pre-publication) and `451e15be…` (published version); **both awaiting Bitcoin confirmation → `ots upgrade` still to run** |
+| Archive | Wayback 20260825121928 (article) / 20260825122121 (home); 9 figures + 8 collapsed data tables confirmed present in the snapshot |
+| Deploy | Pages `build_type: workflow` — **must stay that way**, see Deploy configuration below |
+| Outstanding | `ots upgrade` after confirmation; Zenodo DOI once the owner picks a licence |
 
-**REMAINING, in order:**
-1. Owner confirms the date shown on the page (currently `2026-08-24`, the drafting date)
-2. Fill the publication assertions below **in one batch** (setting `post-published` switches the `citation_*` tags on automatically)
-3. Independent audit of those assertions
-4. Branch → push → merge to `main` (merging is what deploys)
-5. Second timestamp covering the published version
-6. Zenodo switch ON **before** creating the Release; then Release → DOI → backfill BibTeX
+**Sections 0–3 below are the original pre-publication checklist, kept as the
+record of what was decided and verified before go-live. The standing rules at
+the end are what applies to future posts.**
 
 ---
 ## 0. Blocking decisions (owner)
@@ -182,3 +176,40 @@ Order matters — display format is file content, so it must be frozen first.
 
 Rollback: revert to the previously deployed SHA and re-run the workflow.
 Record both SHAs before pushing.
+
+---
+
+## Standing rules (locked 2026-08-25)
+
+Earned during the first real publish. Each exists because it was violated or
+nearly violated that day.
+
+1. **Verify the live site after every deploy — the built artifact is not
+   evidence of what is served.** Check both directions: key pages return 200
+   *with the right content*, and paths that should be gone return 404. On the
+   first publish the artifact was correct all along (CI compiled 4 pages), but
+   GitHub Pages was set to `build_type: legacy` and served a Jekyll render of
+   the repo root for 14 minutes instead. Every check we had inspected the local
+   `_site/`; **"local artifact = live content" was assumed and never tested
+   until it failed.**
+2. **What is pushed must byte-equal what was verified.** Evidence files,
+   documentation and content go in separate commits. The natural urge to
+   "commit related things together" is exactly what breaks an audit trail.
+3. **`Updated` tracks prose only, and only after publication.** Styling changes
+   never move it. An `Updated` earlier than `Published` is nonsense; edits made
+   before a post exists publicly are drafting.
+4. **Decorative images never enter Figure numbering** and stay out of the
+   evidence manifest.
+5. **Timestamp proofs (`.ots`) are evidence, not documentation.** Never
+   regenerate a stamped manifest; a lost proof cannot be rebuilt, and
+   re-stamping only ever proves a later time.
+6. **When something disappears, ask what appeared.** The incident report for
+   the 14-minute outage listed the pages that 404'd but missed that raw repo
+   source had become publicly fetchable — the more consequential half.
+
+## Deploy configuration
+
+GitHub Pages must stay on `build_type: workflow`. Under `legacy` both the
+Actions workflow and the built-in Jekyll builder run on every push, roughly one
+second apart, and **whichever finishes last wins** — a race that silently
+publishes the wrong thing.
