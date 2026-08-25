@@ -3,3 +3,232 @@ CUSTOM STYLES
 
 Add your custom CSS styles here to override or extend the default styles.
 *******************************************************************************/
+
+/* Collapsed data tables behind blog figures */
+.figure-data {
+	margin: 0.4em 0 1.6em;
+	font-size: 0.85rem;
+	overflow-x: auto;
+}
+
+.figure-data summary {
+	cursor: pointer;
+	font-style: italic;
+	color: var(--theme-footer, #777);
+}
+
+.figure-data table {
+	border-collapse: collapse;
+	margin-top: 0.6em;
+	font-variant-numeric: tabular-nums;
+}
+
+.figure-data th,
+.figure-data td {
+	padding: 0.1em 0.6em;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.figure-data th:first-child,
+.figure-data td:first-child {
+	text-align: left;
+}
+
+.figure-data thead tr {
+	border-bottom: 1px solid currentColor;
+}
+
+/*******************************************************************************
+RANDOM MARGIN IMAGE
+*******************************************************************************/
+
+/* Every candidate ships in the HTML; only one is shown. Without JavaScript the
+   first candidate stays visible, so the slot is never empty.
+   These rules cover bare images placed straight in the slot; captioned
+   candidates use `.random-item` further down and must not be caught here. */
+.random-image > img {
+	display: none;
+}
+
+.random-image > img:first-of-type,
+.random-image > img.is-shown {
+	display: block;
+}
+
+/* When the script has chosen, its pick wins even over the first-of-type rule. */
+.random-image > img:not(.is-shown):first-of-type:has(~ img.is-shown) {
+	display: none;
+}
+
+/*******************************************************************************
+POST BYLINE AND ARCHIVAL STAMPS
+*******************************************************************************/
+
+.post-byline {
+	width: 55%;
+	margin: 0.2rem 0 0.6rem;
+	font-size: 1.1rem;
+	line-height: 1.5;
+	color: var(--theme-line-numbers-text, #888);
+}
+
+.post-byline .byline-author {
+	font-style: italic;
+	color: inherit;
+	/* Keep the name whole; the line may break between items instead. */
+	white-space: nowrap;
+}
+
+/* Separate the items with a middot and plenty of air, so the author and the
+   two timestamps read as three distinct things rather than one run-on line. */
+.post-byline .byline-item,
+.post-byline .byline-tz {
+	white-space: nowrap;
+}
+
+.post-byline .byline-item::before,
+.post-byline .byline-tz::before {
+	content: "·";
+	margin: 0 0.85em;
+	opacity: 0.65;
+}
+
+.post-byline .byline-label {
+	letter-spacing: 0.02em;
+}
+
+.post-byline time {
+	font-variant-numeric: tabular-nums;
+}
+
+/* An unpublished post says so plainly instead of showing an invented date. */
+.post-byline .byline-pending {
+	font-style: italic;
+}
+
+.post-byline .byline-tz {
+	font-size: 0.92em;
+	opacity: 0.8;
+}
+
+/*******************************************************************************
+DECORATIVE POST IMAGE
+*******************************************************************************/
+
+/* Opening illustration in the margin column. Not a numbered figure: it carries
+   no evidence and must not be confused with Figure 1-9.
+   The geometry reproduces what `.marginnote` gets inside a 55% text column:
+   width 50% of 55% = 27.5% of the article, and a right edge at 55% + 33% = 88%,
+   i.e. 12% of clearance. Using a block element rather than the marginnote span
+   keeps the caption's `<p>` valid, so it stays with its image. */
+.post-hero {
+	float: right;
+	clear: right;
+	width: 27.5%;
+	margin: 0.2rem 12% 1rem 0;
+}
+
+.post-hero img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 0 0.1rem;
+}
+
+/* Typst puts the caption in its own paragraph; drop the inherited body spacing
+   so it sits tight under the image. */
+.post-hero p {
+	width: auto;
+	margin: 0;
+}
+
+/* Narrow screens (including a zoomed-in desktop window) drop the margin
+   column, so the image joins the text flow. It stays small there: a decorative
+   image blown up to full width would dominate the page and push the actual
+   heading and text out of view. */
+@media (max-width: 760px) {
+	.post-hero {
+		float: none;
+		width: 100%;
+		max-width: 300px;
+		margin: 1rem 0 1.5rem;
+	}
+}
+
+/*******************************************************************************
+CITE THIS POST
+*******************************************************************************/
+
+.post-citation {
+	width: 55%;
+	margin: 3rem 0 1rem;
+}
+
+.post-citation h3 {
+	margin-bottom: 0.6rem;
+}
+
+.post-citation .citation-pending {
+	width: 100%;
+	font-size: 1.1rem;
+	font-style: italic;
+	color: var(--theme-line-numbers-text, #888);
+}
+
+/* `pre` is itself 55% wide in the base theme, which compounds with the 55% of
+   this section and leaves a narrow strip. Inside the citation it fills the
+   section instead. */
+.post-citation pre {
+	width: 100%;
+	white-space: pre;
+}
+
+/* Base tufte caps code at 52.5% of its column and scrolls the overflow. A
+   citation is meant to be read and copied whole, so it wraps instead: no
+   horizontal scrollbar, and nothing hidden past the right edge. Wrapping is
+   visual only — the copy button reads the source text, so what lands on the
+   clipboard is still valid BibTeX. */
+.post-citation pre > code {
+	display: block;
+	width: 100%;
+	margin-left: 0;
+	padding-right: 3.5rem;
+	box-sizing: border-box;
+	white-space: pre-wrap;
+	overflow-x: visible;
+}
+
+/* Caption under a decorative image. Plain text, not a figure caption, so it
+   never enters the Figure numbering. */
+.hero-caption {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 0.92em;
+	line-height: 1.35;
+	font-style: italic;
+	color: var(--theme-line-numbers-text, #888);
+}
+
+/* Candidates in a rotating slot: image and caption hide and show together. */
+.random-image .random-item {
+	display: none;
+}
+
+.random-image .random-item:first-of-type,
+.random-image .random-item.is-shown {
+	display: block;
+}
+
+.random-image .random-item:not(.is-shown):first-of-type:has(~ .random-item.is-shown) {
+	display: none;
+}
+
+/* Narrow screens: the byline and citation use the full column, matching what
+   the base theme does with body paragraphs. */
+@media (max-width: 760px) {
+	.post-byline,
+	.post-citation {
+		width: 100%;
+	}
+}

@@ -76,6 +76,7 @@
   website-url: none,
   image-path: none,
   feed-dir: (),
+  published: none,
 ) = {
   // Basic meta tags
   html.meta(charset: "utf-8")
@@ -128,6 +129,47 @@
 
   if canonical-url != none {
     html.link(rel: "canonical", href: canonical-url)
+  }
+
+  // Highwire Press citation tags — what Google Scholar and Zotero read to
+  // build a citation automatically, so a reader's "save to Zotero" agrees with
+  // the BibTeX block at the foot of the page.
+  //
+  // Deliberately emitted ONLY once `published` is set. An unpublished post has
+  // no publication date and no stable URL, and a citation asserting either
+  // would be wrong in the one way citations must never be wrong. While
+  // `published` is `none` these tags are absent, matching the byline.
+  if published != none and type(published) == datetime {
+    let two(n) = if n < 10 { "0" + str(n) } else { str(n) }
+    let pub-date = (
+      str(published.year()) + "/" + two(published.month()) + "/" + two(published.day())
+    )
+    html.meta(name: "citation_title", content: title)
+    if author != none {
+      html.meta(name: "citation_author", content: author)
+    }
+    html.meta(name: "citation_publication_date", content: pub-date)
+    if canonical-url != none {
+      html.meta(name: "citation_public_url", content: canonical-url)
+    }
+    html.elem(
+      "meta",
+      attrs: (
+        property: "article:published_time",
+        content: (
+          str(published.year())
+            + "-"
+            + two(published.month())
+            + "-"
+            + two(published.day())
+            + "T"
+            + two(published.hour())
+            + ":"
+            + two(published.minute())
+            + ":00+00:00"
+        ),
+      ),
+    )
   }
 
   // SEO tags (Open Graph, Twitter Card, etc.)

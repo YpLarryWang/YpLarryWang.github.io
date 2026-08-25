@@ -8,8 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		const pre = codeBlock.parentElement;
 
 		// ========== Add line numbers ==========
+		// The citation block wraps its long lines, which would put the numbers
+		// out of step with what is on screen, and line numbers are meaningless
+		// on a BibTeX entry anyway. It still gets the copy button below.
+		const skipLineNumbers = pre.closest(".post-citation") !== null;
+
 		// Check if already processed
-		if (!pre.querySelector(".line-numbers-rows")) {
+		if (!skipLineNumbers && !pre.querySelector(".line-numbers-rows")) {
 			// Clone to count lines correctly handling <br>
 			const clone = codeBlock.cloneNode(true);
 			const brs = clone.querySelectorAll("br");

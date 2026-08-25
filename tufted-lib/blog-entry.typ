@@ -1,8 +1,11 @@
-/// Renders a blog index entry with a date column and linked title.
+#import "tags.typ": tag-list, tag-slug
+
+/// Renders a blog index entry with a date column, linked title, and optional tags.
 ///
 /// The `date` argument may be either a `datetime` value or preformatted
 /// content. The `path` argument may include or omit a trailing slash.
-#let blog-entry(date: auto, path: str, title: str) = {
+/// `tags` is an array of strings, with or without a leading `#`.
+#let blog-entry(date: auto, path: str, title: str, tags: (), filter: false) = {
   let href = if path.ends-with("/") {
     path
   } else {
@@ -15,8 +18,14 @@
     date
   }
 
-  html.div(
-    class: "blog-entry",
+  let slugs = tags.map(tag-slug).filter(s => s != "")
+
+  html.elem(
+    "div",
+    attrs: (
+      class: "blog-entry",
+      "data-tags": slugs.join(" "),
+    ),
     {
       html.div(
         class: "blog-entry-date",
@@ -24,7 +33,10 @@
       )
       html.div(
         class: "blog-entry-content",
-        html.a(href: href, title),
+        {
+          html.a(href: href, title)
+          tag-list(tags, filter: filter)
+        },
       )
     },
   )

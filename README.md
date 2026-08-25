@@ -240,3 +240,14 @@ Tufted-Blog-Template/
 - [Typst Universe](https://typst.app/universe/package/tufted)
 - [Tufte CSS](https://edwardtufte.github.io/tufte-css/)
 - [tufted.vsheg.com](https://tufted.vsheg.com) — Tufted 包作者提供的在线演示网站和简单文档
+
+## Licensing
+
+Two licences apply to this repository, covering different things:
+
+- **Template code** (`build.py`, `tufted-lib/`, `assets/`) — MIT, from the
+  [Tufted Blog Template](https://github.com/Yousa-Mirage/Tufted-Blog-Template).
+  See `LICENSE`.
+- **Written content** (everything under `content/`: prose, figures, data
+  tables, images) — CC BY 4.0, © 2026 Yupei Wang. See `LICENSE-CONTENT`.
+

@@ -5,6 +5,7 @@
   description: "Understanding the differences between iterators and generators in Python, and when to use each.",
   date: datetime(year: 2024, month: 10, day: 4),
   lang: "en",
+  tags: ("Python", "Programming"),
 )
 
 = Iterators vs Generators in Python

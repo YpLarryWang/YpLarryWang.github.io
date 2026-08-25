@@ -5,7 +5,8 @@
 	const MIN_H3_HEADINGS = 3;
 
 	function collectHeadings(section) {
-		return Array.from(section.querySelectorAll("h2, h3")).filter(
+		// h2 is the page title; the TOC lists sections (h3) and subsections (h4).
+		return Array.from(section.querySelectorAll("h3, h4")).filter(
 			(heading) => !heading.closest('[role="doc-bibliography"]'),
 		);
 	}
@@ -43,9 +44,6 @@
 			const link = document.createElement("a");
 
 			item.classList.add(`toc-${heading.tagName.toLowerCase()}`);
-			if (index > 0) {
-				item.classList.add("toc-after-title");
-			}
 			link.href = `#${id}`;
 			link.textContent = heading.textContent.trim();
 

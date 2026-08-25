@@ -3,9 +3,12 @@
 #import "notes.typ": template-notes
 #import "figures.typ": template-figures
 #import "blog-entry.typ": blog-entry
+#import "tags.typ": tag-list, tag-label, tag-href, tag-slug, normalize-tag
 #import "layout.typ": full-width, margin-note
 #import "links.typ": template-links
 #import "metadata.typ": metadata
+#import "byline.typ": byline
+#import "citation.typ": citation
 
 /// The main wrapper function of Tufted Blog Template.
 ///
@@ -20,6 +23,7 @@
   description: "",
   lang: "zh",
   date: none,
+  published: none,
   website-title: "",
   website-url: none,
 
@@ -28,6 +32,9 @@
 
   // For RSS
   feed-dir: (),
+
+  // Blog tags (strings, with or without a leading `#`)
+  tags: (),
 
   // Custom header and footer
   header-elements: (),
@@ -60,6 +67,7 @@
           description: description,
           lang: lang,
           date: date,
+          published: published,
           website-title: website-title,
           website-url: website-url,
           image-path: image-path,
@@ -68,7 +76,7 @@
 
         // load CSS
         let base-css = (
-          "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
+          "/assets/tufte.min.css",
           "/assets/tufted.css",
           "/assets/theme.css",
         )

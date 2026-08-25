@@ -471,6 +471,14 @@ def build_html(force: bool = False) -> bool:
     # 排除标记为 PDF 的文件
     html_files = [f for f in typ_files if "pdf" not in f.stem.lower()]
 
+    # 排除纯数据文件：`posts.typ` 是文章目录，被别的页面 import，本身不是页面。
+    # 直接编译它只会产出一个空白页（/Blog/posts/），既无内容又可能被访问到。
+    html_files = [
+        f
+        for f in html_files
+        if not (f.name == "posts.typ" and f.parent.name == "Blog")
+    ]
+
     if not html_files:
         print("  ⚠️ 未找到任何 HTML 文件。")
         return True
@@ -620,6 +628,12 @@ def copy_content_assets(force: bool = False) -> bool:
             if any(part.startswith("_") for part in relative_path.parts):
                 continue
 
+            # 跳过隐藏文件与系统元数据（.DS_Store 等）。
+            # 注意：`.gitignore` 管不到这里——它只影响仓库，而部署发布的是
+            # 构建产物，所以被 git 忽略的文件仍然会被复制进去、随站点上线。
+            if any(part.startswith(".") for part in relative_path.parts):
+                continue
+
             # 计算目标路径
             target_path = SITE_DIR / relative_path
 
@@ -698,32 +712,39 @@ def preview(port: int = 8000, open_browser_flag: bool = True) -> bool:
         # 在后台线程中打开浏览器
         threading.Thread(target=open_browser, daemon=True).start()
 
-    # 首先尝试 uvx livereload
-    try:
-        result = subprocess.run(
-            ["uvx", "livereload", str(SITE_DIR), "-p", str(port)],
-            check=False,
-        )
-        return result.returncode == 0
-    except FileNotFoundError:
-        print("  未找到 uv，尝试 Python http.server...")
-    except KeyboardInterrupt:
-        print("\n服务器已停止。")
-        return True
+    # 预览服务器必须禁用缓存：否则改完 CSS/JS 后浏览器会继续用旧副本，
+    # 看起来就像「改动没生效」。这里不用 livereload，因为它会带缓存头。
+    import functools
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-    # 回退到 Python http.server
+    class NoCacheHandler(SimpleHTTPRequestHandler):
+        """本地预览用：每次请求都强制回源，避免看到过期的样式或脚本。"""
+
+        def end_headers(self) -> None:
+            self.send_header("Cache-Control", "no-store, must-revalidate")
+            self.send_header("Expires", "0")
+            super().end_headers()
+
+        def send_header(self, keyword: str, value: str) -> None:
+            # 丢掉 Last-Modified/ETag，防止浏览器据此发起 304 复用旧内容。
+            if keyword in ("Last-Modified", "ETag"):
+                return
+            super().send_header(keyword, value)
+
+        def log_message(self, fmt: str, *args) -> None:
+            pass
+
     try:
-        print("使用 Python 内置 http.server...")
-        result = subprocess.run(
-            [sys.executable, "-m", "http.server", str(port), "--directory", str(SITE_DIR)],
-            check=False,
-        )
-        return result.returncode == 0
+        handler = functools.partial(NoCacheHandler, directory=str(SITE_DIR))
+        with ThreadingHTTPServer(("127.0.0.1", port), handler) as httpd:
+            print(f"  ✓ 预览地址: http://127.0.0.1:{port}/ （已禁用浏览器缓存）")
+            httpd.serve_forever()
+        return True
     except KeyboardInterrupt:
         print("\n服务器已停止。")
         return True
-    except Exception as e:
-        print(f"  ❌ 启动服务器失败: {e}")
+    except OSError as e:
+        print(f"  ❌ 启动服务器失败（端口 {port} 可能已被占用）: {e}")
         return False
 
 
@@ -842,6 +863,24 @@ def extract_post_metadata(index_html: Path) -> tuple[str, str, str, datetime | N
                 pass
 
     return title, description, link, date_obj
+
+
+def get_blog_catalog_paths() -> set[str] | None:
+    """
+    解析 content/Blog/posts.typ 中列出的文章 path，使 RSS 与博客列表保持一致。
+
+    返回:
+        set[str]: catalog 中登记的文章路径（如 "2026-08-24-function-vectors/"）。
+        None: 文件不存在或解析失败（调用方此时不应过滤）。
+    """
+    catalog = CONTENT_DIR / "Blog" / "posts.typ"
+    if not catalog.exists():
+        return None
+    try:
+        return set(re.findall(r'path:\s*"([^"]+)"', catalog.read_text(encoding="utf-8")))
+    except OSError as e:
+        print(f"⚠️ 解析 posts.typ 失败: {e}")
+        return None
 
 
 def collect_posts(dirs: set[str], site_url: str) -> list[dict]:
@@ -1005,6 +1044,17 @@ def generate_rss(site_url: str) -> bool:
     # 收集文章
     posts = collect_posts(existing, site_url)
 
+    # Blog 目录只收录 posts.typ catalog 中列出的文章：
+    # 被移出列表的文章（如示例文章）保留源文件，但不进入 RSS。
+    catalog_paths = get_blog_catalog_paths()
+    if catalog_paths is not None:
+        posts = [
+            p
+            for p in posts
+            if p["dir"] != "Blog"
+            or any(p["link"].rstrip("/").endswith(path.rstrip("/")) for path in catalog_paths)
+        ]
+
     if not posts:
         print("⚠️ 未找到任何文章，RSS 订阅源为空。")
         return True
@@ -1059,6 +1109,28 @@ def generate_sitemap(site_url: str) -> bool:
     # 创建根元素
     urlset = ET.Element("urlset", xmlns=sitemap_ns)
 
+    # sitemap 必须和博客列表、RSS 用同一个事实来源：未登记在 posts.typ 里的文章
+    # 虽然不出现在列表和订阅源里，却仍会被主动提交给搜索引擎收录——「不展示」
+    # 和「不收录」必须是同一件事，否则三处各说各话。
+    catalog_paths = get_blog_catalog_paths()
+
+    def is_delisted_post(url_path: str) -> bool:
+        if catalog_paths is None:
+            return False
+        if not url_path.startswith("Blog/") or url_path == "Blog/":
+            return False
+        remainder = url_path.removeprefix("Blog/")
+        # 只过滤文章目录本身，不影响 Blog 下的功能页（如 tags/）。
+        if remainder.count("/") != 1:
+            return False
+        return remainder not in catalog_paths and remainder.rstrip("/") not in (
+            "tags",
+            "posts",
+        )
+
+    # `posts.typ` 是文章目录数据，不是页面，不应出现在 sitemap 中。
+    skip_paths = {"Blog/posts/"}
+
     # 遍历 _site 目录
     for file_path in sorted(SITE_DIR.rglob("*.html")):
         rel_path = file_path.relative_to(SITE_DIR).as_posix()
@@ -1072,6 +1144,9 @@ def generate_sitemap(site_url: str) -> bool:
             url_path = rel_path.removesuffix(".html") + "/"
         else:
             url_path = rel_path
+
+        if url_path in skip_paths or is_delisted_post(url_path):
+            continue
 
         full_url = f"{site_url}/{url_path}"
 
@@ -1116,6 +1191,49 @@ Sitemap: {site_url}/sitemap.xml
         return False
 
 
+def version_asset_links() -> bool:
+    """
+    给 HTML 中引用的 CSS/JS 加上内容哈希查询串，例如 `/assets/tufted.css?v=1a2b3c4d`。
+
+    为什么需要：浏览器可能把旧的样式表和脚本当成「仍然新鲜」而**根本不发请求**，
+    这时服务器再怎么声明 no-store 也没有机会生效——用户会看到新的 HTML 配旧的
+    样式，页面错乱且难以自查。文件内容一变，URL 就跟着变，浏览器只能重新拉取。
+    """
+    import hashlib
+
+    pattern = re.compile(r'(?P<attr>href|src)="(?P<path>/assets/[^"?]+\.(?:css|js))"')
+    digests: dict[str, str] = {}
+
+    def digest_for(asset_path: str) -> str | None:
+        if asset_path not in digests:
+            local = SITE_DIR / asset_path.lstrip("/")
+            if not local.is_file():
+                digests[asset_path] = ""
+            else:
+                data = local.read_bytes()
+                digests[asset_path] = hashlib.sha256(data).hexdigest()[:8]
+        return digests[asset_path] or None
+
+    updated = 0
+    for html_file in SITE_DIR.rglob("*.html"):
+        original = html_file.read_text(encoding="utf-8")
+
+        def add_version(match: re.Match) -> str:
+            path = match.group("path")
+            version = digest_for(path)
+            if version is None:
+                return match.group(0)
+            return f'{match.group("attr")}="{path}?v={version}"'
+
+        rewritten = pattern.sub(add_version, original)
+        if rewritten != original:
+            html_file.write_text(rewritten, encoding="utf-8")
+            updated += 1
+
+    print(f"✅ 资源链接已加版本号: {updated} 个 HTML 文件")
+    return True
+
+
 def build(force: bool = False) -> bool:
     """
     完整构建：HTML + PDF + 资源。
@@ -1143,6 +1261,7 @@ def build(force: bool = False) -> bool:
 
     results.append(copy_assets())
     results.append(copy_content_assets(force))
+    results.append(version_asset_links())
 
     if site_url := get_site_url():
         results.append(generate_sitemap(site_url))

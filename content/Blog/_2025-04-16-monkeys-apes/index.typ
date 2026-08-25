@@ -5,6 +5,7 @@
   description: "Exploring the key differences between monkeys and apes, including physical traits, intelligence, and evolutionary relationships.",
   date: datetime(year: 2025, month: 4, day: 16),
   lang: "en",
+  tags: ("Biology",),
 )
 
 = Monkeys vs Apes: Understanding the Difference

@@ -6,6 +6,7 @@
   description: "An in-depth look at the normal distribution, its properties, significance, and real-world applications across various fields.",
   date: datetime(year: 2025, month: 10, day: 30),
   lang: "en",
+  tags: ("Statistics", "Probability"),
 )
 
 

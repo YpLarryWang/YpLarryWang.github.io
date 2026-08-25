@@ -357,6 +357,10 @@ table tbody tr:hover {
 		margin: 1.5em auto;
 	}
 
+	.article-tags {
+		width: 90%;
+	}
+
 	figure {
 		margin: 1.5em auto;
 	}
@@ -371,24 +375,49 @@ table tbody tr:hover {
 MATH NOTATION
 *******************************************************************************/
 
-/* Block math equations - display as block, centered */
+/* Block math equations - display as block, centered.
+   The width is deliberately the full measure of the containing column rather
+   than the 55% the base template uses for figures: the widest equation here
+   needs about 31em, and at 55% it was being cut off mid-expression. An
+   equation that is silently truncated reads as a different, complete-looking
+   equation, so clipping is never an acceptable fallback. */
 figure[role="math"] {
 	display: block;
+	/* Match the measure of `section > p` so an equation is centred on the text
+	   column, not on the full article box (which would shove it right, into
+	   the margin-note gutter). */
 	width: 55%;
+	max-width: 55%;
 	text-align: center;
 	margin: 1em 0;
 	padding: 0.5em 0;
-	font-size: 1.4em;
+	/* Body copy is 1.4rem; `1em` here resolved against `section` at 14px, so
+	   display equations were rendering ~29% smaller than the prose around
+	   them. Equations inside a list already inherited 1.4rem, which is why
+	   only some of them looked small. */
+	font-size: 1.4rem;
 	line-height: 1.2;
-	overflow-x: auto;
-	overflow-y: hidden;
 }
 
-/* Math content wrapper - prevent shrinking */
+/* Inside a list item the measure is the list item itself, so use all of it —
+   this is the space the truncated appendix equations needed. */
+li figure[role="math"] {
+	width: 100%;
+	max-width: 100%;
+}
+
+/* Never introduce a horizontal scrollbar on an equation: if one still cannot
+   fit, it scales down as a whole so it stays complete and legible. */
 figure[role="math"] > * {
 	display: inline-block;
-	min-width: max-content;
+	min-width: 0;
+	max-width: 100%;
 	text-align: center;
+}
+
+figure[role="math"] svg {
+	max-width: 100%;
+	height: auto;
 }
 
 figure > figure[role="math"] {
@@ -398,14 +427,13 @@ figure > figure[role="math"] {
 	margin: 0 auto;
 	padding: 0.5em 0;
 	max-width: 100%;
-	overflow-x: auto;
-	overflow-y: hidden;
 }
 
 /* Math content wrapper for nested figures */
 figure > figure[role="math"] > * {
 	display: inline-block;
-	min-width: max-content;
+	min-width: 0;
+	max-width: 100%;
 	text-align: center;
 }
 
@@ -676,20 +704,143 @@ BLOG INDEX
 	white-space: nowrap;
 }
 
+.blog-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4em 1.1em;
+	margin-top: 0.35em;
+}
+
+.article-tags {
+	width: 55%;
+	margin: 0.25em 0 2em;
+}
+
+.article-tags .blog-tag:any-link {
+	font-size: 1.1rem;
+}
+
+.blog-tag:any-link {
+	font-size: 0.95rem;
+	color: var(--theme-footer, #777);
+	text-decoration: none;
+	border-bottom: 0;
+	box-shadow: none;
+}
+
+.blog-tag:hover,
+.blog-tag:focus-visible {
+	color: var(--theme-heading, #111);
+	background: var(--highlight-weak);
+	outline: none;
+}
+
+.blog-tag-picker {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.45em 1.2em;
+	margin: 0.25em 0 1.25em;
+	color: var(--theme-footer, #777);
+}
+
+.blog-tag-picker .blog-tag:any-link {
+	font-size: 1em;
+}
+
+.blog-tag-filter.is-active {
+	color: #C15F3C;
+}
+
+.blog-tag-filter.is-active:hover,
+.blog-tag-filter.is-active:focus-visible {
+	color: #C15F3C;
+}
+
+.blog-entry .blog-tag-filter.is-active:any-link {
+	color: #C15F3C;
+}
+
+.blog-entry .blog-tag-filter.is-active:hover,
+.blog-entry .blog-tag-filter.is-active:focus-visible {
+	color: #C15F3C;
+	background: var(--highlight-weak);
+}
+
+.blog-show-all {
+	display: none;
+	color: var(--theme-footer, #777);
+	text-decoration: none;
+	border-bottom: 0;
+	box-shadow: none;
+	font-size: 1.15em;
+	font-style: italic;
+}
+
+.blog-tag-picker.is-filtered .blog-show-all {
+	display: inline;
+}
+
+.blog-year[hidden],
+.blog-entry[hidden] {
+	display: none;
+}
+
+.tag-index-heading {
+	margin-top: 1.5em;
+}
+
 /*******************************************************************************
 TABLE OF CONTENTS
 *******************************************************************************/
 
+/* Width of the fixed TOC column, and the gutter reserved for it on the left.
+   The gutter is reserved on <body>, so the text column can never run under
+   the TOC no matter how wide the viewport is. */
+:root {
+	--toc-col: 14rem;
+	--toc-gap: 3rem;
+	--toc-top: 15rem;
+	--content-max: 1200px;
+
+	/* Tufte margin notes float into the right 45% but stop about 12% of the
+	   article box short of its right edge, so that strip is always empty.
+	   Measuring the ink by that 88% keeps the page optically centred instead
+	   of visually pushed left. */
+	/* The article rarely gets its full --content-max on a smaller window, so
+	   the ink estimate has to use the width it will actually receive;
+	   otherwise the group is centred as if it were wider and drifts left. */
+	--content-fit: min(
+		var(--content-max),
+		calc(100vw - var(--toc-col) - var(--toc-gap) - 3rem)
+	);
+	--ink-w: calc(var(--toc-col) + var(--toc-gap) + var(--content-fit) * 0.88);
+
+	/* Margin either side of the TOC-plus-article group. The TOC is positioned
+	   from the same value the body padding uses, so the two can never drift
+	   apart and the TOC always sits directly beside the text rather than
+	   marooned against the window edge. */
+	--ink-left: max(1.5rem, calc((100vw - var(--ink-w)) / 2));
+}
+
 .toc-sidebar {
 	position: fixed;
-	top: 15rem;
-	left: 1rem;
+	top: var(--toc-top);
+	left: var(--ink-left);
 	z-index: 10;
 	display: none;
-	width: 13%;
-	max-height: calc(100vh - 11rem);
+	width: var(--toc-col);
+	/* Stop above the bottom of the window instead of running off it. */
+	max-height: calc(100vh - var(--toc-top) - 2rem);
 	overflow-y: auto;
 	color: var(--theme-line-numbers-text, #aaa);
+	/* The TOC scrolls when a post has many sections, but a visible scrollbar
+	   in the margin is noisy, so keep the scrolling and drop the bar. */
+	scrollbar-width: none;
+}
+
+.toc-sidebar::-webkit-scrollbar {
+	display: none;
 }
 
 .toc-sidebar ol {
@@ -702,15 +853,15 @@ TABLE OF CONTENTS
 	margin: 0 0 0.2em;
 }
 
-.toc-sidebar .toc-after-title {
+.toc-sidebar .toc-h4 {
 	padding-left: 0.8em;
 }
 
 .toc-sidebar a:any-link {
 	display: block;
 	color: inherit;
-	font-size: 0.95rem;
-	line-height: 1.1;
+	font-size: 1.1rem;
+	line-height: 1.25;
 	text-decoration: none;
 	border-left: 1px solid transparent;
 	padding-left: 0.6em;
@@ -730,5 +881,28 @@ TABLE OF CONTENTS
 @media (min-width: 1200px) {
 	.toc-sidebar {
 		display: block;
+	}
+
+	/* Once the TOC is visible it owns the left margin, so reserve that column
+	   on <body> instead of letting a fixed nav sit on top of the text. The
+	   reservation is padding inside a border box, so it can never push the
+	   content past the right edge of the viewport. */
+	body {
+		box-sizing: border-box;
+		width: 100%;
+		max-width: none;
+		padding-left: calc(var(--ink-left) + var(--toc-col) + var(--toc-gap));
+		padding-right: 1.5rem;
+	}
+
+	/* The article starts immediately after the reserved TOC column; the group
+	   as a whole is what gets centred, via --ink-left above. */
+	body > article,
+	body > header,
+	body > footer {
+		width: 100%;
+		max-width: var(--content-max);
+		margin-left: 0;
+		margin-right: auto;
 	}
 }
