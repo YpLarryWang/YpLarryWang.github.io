@@ -89,15 +89,21 @@ Takes seconds; it is the only step that would have caught the two misses above.
 - [ ] **`uv run build.py build --force`** — never an incremental build. An
       incremental build only adds and updates; it does **not** remove artifacts
       whose source was deleted, so anything "already deleted" can still ship.
-- [ ] **Check BOTH layers separately — neither one alone settles it:**
-      - `content/` decides what enters the **repo** (a `git add -A` takes it)
-      - `_site/` decides what goes on the **website**
-      These can desync in either direction. Source deleted but artifact kept →
-      you think it is gone, it publishes. Artifact gone but source kept → the
-      preview looks clean, it lands in the repo. The second is what actually
-      happened with the owner's private images.
-- [ ] Note `.gitignore` does **not** protect the site: the deploy publishes the
-      build output, and the asset copier ignores git entirely.
+- [ ] **What actually reaches the public site is the COMMIT, not the local
+      build.** `_site/` is gitignored and CI rebuilds it from the checked-out
+      repo (`build.py build -f`), so the local build output never uploads.
+      **The only gate is what is committed** — `git status` before pushing.
+      Anything sitting in `content/` will be copied into the site by CI whether
+      or not a page links to it.
+- [ ] Still check both layers locally, for a different reason: the local
+      `_site/` is what you *inspect*, so if it is stale you are verifying
+      something other than what will deploy. Source deleted but artifact kept →
+      the preview lies to you. Artifact gone but source kept → the preview looks
+      clean while the file still lands in the repo (this is what happened with
+      the owner's private images).
+- [ ] `.gitignore` does not stop the asset copier: a gitignored file inside
+      `content/` is still copied into the build (`.DS_Store` did this). It only
+      stops it reaching the site because it never gets committed.
 - [ ] Content: article `index.typ` SHA matches Valla's approved snapshot; ask
       Valla to diff the increment and re-verify numbers
 - [ ] Surfaces agree: listing, `feed.xml`, `sitemap.xml` all derive from
