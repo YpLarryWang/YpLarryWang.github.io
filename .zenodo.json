@@ -15,5 +15,12 @@
     "AGOP",
     "training dynamics",
     "representation learning"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://ypwang.one/Blog/fv-agop-dev-interp/",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-article"
+    }
   ]
 }
