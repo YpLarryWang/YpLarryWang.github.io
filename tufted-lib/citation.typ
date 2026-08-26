@@ -14,6 +14,7 @@
   title: none,
   year: none,
   month: none,
+  doi: none,
   url: none,
   urldate: none,
   note: none,
@@ -23,6 +24,7 @@
   if title != none { lines.push("  title        = {" + title + "},") }
   if year != none { lines.push("  year         = {" + year + "},") }
   if month != none { lines.push("  month        = {" + month + "},") }
+  if doi != none { lines.push("  doi          = {" + doi + "},") }
   if url != none { lines.push("  howpublished = {\\url{" + url + "}},") }
   if urldate != none { lines.push("  urldate      = {" + urldate + "},") }
   if note != none { lines.push("  note         = {" + note + "},") }
@@ -37,6 +39,7 @@
   title: none,
   year: none,
   month: none,
+  doi: none,
   url: none,
   urldate: none,
   note: none,
@@ -67,6 +70,7 @@
             title: title,
             year: year,
             month: month,
+            doi: doi,
             url: url,
             urldate: urldate,
             note: note,

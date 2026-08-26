@@ -419,6 +419,10 @@ The theoretical baselines for subspace energy and alignment derive from projecti
   title: "How Do Function Vectors Come into Being and Where Do They Live?",
   year: "2026",
   month: "aug",
+  // Zenodo concept DOI, not the v1.0.0 version DOI. The concept DOI always
+  // resolves to the newest archived version, so it stays correct as the post
+  // is revised; a version DOI would pin readers to the first snapshot.
+  doi: "10.5281/zenodo.22109632",
   url: "https://ypwang.one/Blog/fv-agop-dev-interp/",
   urldate: "2026-08-25",
   note: "Blog post",
