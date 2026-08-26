@@ -388,3 +388,23 @@ existed before 2026-08-25" survives regardless.
 `ots upgrade` has attached a Bitcoin attestation. Only then may it enter a
 permanent archive.
 
+## Match the deploy run by commit SHA, never by "the latest one"
+
+```
+gh run list --limit 10 --json databaseId,headSha \
+  -q '.[] | select(.headSha=="'"$(git rev-parse HEAD)"'") | .databaseId'
+```
+
+Taking the most recent run races the push: the new workflow may not be listed
+yet, so the query returns the *previous* run, waits for it, and reports a
+success that belongs to someone else's commit. That happened here — a deploy was
+reported complete while the live page still lacked the change.
+
+What makes this class hard is that it is usually right. The latest run and my
+run are the same object except during the few seconds after a push, so the
+error never reproduces on demand and looks like a fluke. Selecting by SHA moves
+it from *usually correct* to *correct by construction*.
+
+Same remedy as the stamp-then-upgrade ordering: do not rely on being careful at
+the moment it matters; remove the possibility of the wrong answer.
+
