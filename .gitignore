@@ -35,3 +35,15 @@ Thumbs.db
 
 # todo
 TODO.md
+
+# Tufted template demo material — kept on disk as a local reference, but
+# deliberately untracked so it never reaches the remote or a Zenodo archive.
+# These directories are underscore-prefixed, so the site build already skips
+# them; removing them from tracking was verified to leave the built site
+# byte-identical.
+content/_CV/
+content/_Docs/
+content/Blog/_2024-10-04-iterators-generators/
+content/Blog/_2025-04-16-monkeys-apes/
+content/Blog/_2025-10-30-normal-distribution/
+
