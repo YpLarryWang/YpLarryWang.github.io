@@ -333,3 +333,58 @@ The two statements sound similar and differ completely in force: one means the
 hash was compared against a block on the chain, the other only means the file
 contains such a record. Say the second, and say it in those words.
 
+## When a new timestamp proof is needed
+
+**Ask one question: is the changed file inside the manifest's scope?**
+
+```
+content/Blog/<post>/index.typ   in scope   -> re-stamp
+figures, data tables, diagram   in scope   -> re-stamp
+.zenodo.json                    out        -> no proof needed
+CSS / JS / README / tooling     out        -> no proof needed
+```
+
+The manifest anchors 31 files and says so in its own header; the repository
+holds 85. It has never been a snapshot of the tree, and its `NOT covered` line
+is part of the claim rather than an omission.
+
+**Do not use "the tree changed" as the trigger.** That reasoning sounds
+cautious and quietly creates unbounded work: a CSS tweak, a typo fix, or a line
+of README would each demand a fresh proof, and the tree changes again the moment
+the proof is committed. It is the same infinite regress as trying to make an
+archive contain its own DOI, entering through a different door.
+
+**A scoped manifest's entire value is that out-of-scope changes leave it
+accurate.** Reasoning that erases that distinction erases the value.
+
+Keeping the stamped tree close to the released tree is still good practice —
+edit release metadata first, then stamp — but that is hygiene, not correctness.
+
+## Upgrade a proof before archiving it — never archive a fresh stamp
+
+**A freshly stamped `.ots` contains zero Bitcoin attestations, by definition.**
+`ots stamp` returns a calendar commitment; the Bitcoin attestation only exists
+once the calendar's transaction is mined, an hour or two later. So "stamp, then
+immediately archive" does not risk producing an incomplete proof — it produces
+one every single time, without exception. The ordering itself is the defect.
+
+This happened to the v1.0.0 archive. Verified by downloading the published zip
+from Zenodo and inspecting it, not by reading the record page:
+
+```
+proof 1 (pre-publication)  3600 B  3 attestations  -> verifiable offline
+proof 2 (published)        1632 B  1 attestation   -> verifiable offline
+proof 3 (final)            1050 B  0 attestations  -> needs a calendar server
+```
+
+Scope of the damage, stated precisely: the archive is **internally
+self-verifying for content** — its manifest matches the archived files 31/31
+with no network access. Only the *time* anchor of the third proof is degraded,
+from "guaranteed by Bitcoin" to "guaranteed by a volunteer-run server staying
+alive". Proof 2 still anchors the published article offline, so the claim "this
+existed before 2026-08-25" survives regardless.
+
+**Rule:** a stamp is not finished when `ots stamp` succeeds. It is finished when
+`ots upgrade` has attached a Bitcoin attestation. Only then may it enter a
+permanent archive.
+
