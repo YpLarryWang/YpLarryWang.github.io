@@ -27,7 +27,7 @@
           html.elem(
             "span",
             attrs: (class: "hero-caption"),
-            "Ellen Browning Scripps Memorial Pier, La Jolla. Photographed 14 August 2026.",
+            "Ellen Browning Scripps Memorial Pier, La Jolla.",
           )
         },
       )

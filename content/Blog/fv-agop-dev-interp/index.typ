@@ -76,7 +76,7 @@
     html.elem(
       "span",
       attrs: (class: "hero-caption"),
-      "Shantang Street, Suzhou. Photographed 7 July 2025.",
+      "Shantang Street, Suzhou.",
     )
   },
 )

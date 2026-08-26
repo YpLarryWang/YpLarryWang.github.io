@@ -5,7 +5,11 @@
 /// format references. To relist one, add its entry back here.
 #let posts = (
   (
-    date: datetime(year: 2026, month: 8, day: 24),
+    // Must equal the post's `post-published` date. These are two separately
+    // maintained fields with nothing enforcing equality, and they drifted
+    // once already: the listing showed 2026-08-24 while every other surface
+    // said 2026-08-25. `preflight.py` now compares them.
+    date: datetime(year: 2026, month: 8, day: 25),
     path: "fv-agop-dev-interp/",
     title: "How Do Function Vectors Come into Being and Where Do They Live?",
     tags: ("MechanisticInterpretability", "Steering", "AGOP", "TrainingDynamics", "RepresentationLearning"),
