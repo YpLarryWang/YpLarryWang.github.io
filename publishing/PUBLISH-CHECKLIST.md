@@ -303,3 +303,33 @@ Two rules that section follows, both load-bearing:
   `sitemap <lastmod>` comes from file mtime and equals the build date by design;
   comparing it would raise a disagreement on every run.
 
+## Two checks that share a foundation are one check run twice
+
+A generator and its own verifier share a parser and a set of assumptions about
+the format. If the generator misreads something, the verifier misreads it the
+same way and reports agreement. That is not redundancy: the probability of
+error has not moved, only confidence in it.
+
+So "double-checked" is only meaningful when the second check rests on a
+*different* foundation — recomputed a different way, by a different party, or
+from a different artifact. Before stamping the third proof, all 31 manifest
+entries were re-hashed independently rather than accepting the generator's own
+verify pass.
+
+## What can and cannot be verified locally
+
+`ots verify` requires a Bitcoin node to compare against the chain. There is none
+on this machine, so it cannot complete here, and **"the proof verifies" must
+never be claimed from this environment.**
+
+What *can* be established locally is whether a proof has a Bitcoin attestation
+embedded:
+
+```
+ots info <file>.ots | grep -ci 'bitcoin block'
+```
+
+The two statements sound similar and differ completely in force: one means the
+hash was compared against a block on the chain, the other only means the file
+contains such a record. Say the second, and say it in those words.
+
