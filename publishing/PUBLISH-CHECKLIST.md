@@ -213,3 +213,93 @@ GitHub Pages must stay on `build_type: workflow`. Under `legacy` both the
 Actions workflow and the built-in Jekyll builder run on every push, roughly one
 second apart, and **whichever finishes last wins** — a race that silently
 publishes the wrong thing.
+
+## Comparing builds: exclude volatile fields, and list them explicitly
+
+**The build is not deterministic.** Two builds of identical input differ,
+because `feed.xml` rewrites `<lastBuildDate>` with the current time on every
+run. Any check that diffs build output before and after a change must exclude
+such fields first, or it reports a difference every single time — and an alarm
+that always fires is worse than no alarm, because it trains people to skim past
+real differences too.
+
+**The exclusion list must be written down here, never applied silently.**
+Otherwise, when a new volatile field appears, nobody can tell why comparisons
+suddenly started reporting differences again.
+
+Known volatile fields:
+
+- `feed.xml` → `<lastBuildDate>`
+
+Two further conditions, both learned by getting them wrong:
+
+- **Fingerprints only compare if produced by the identical command from the
+  identical working directory.** `shasum` output lines contain the file path, so
+  `find _site -type f` and `cd _site && find . -type f` yield different
+  aggregates for byte-identical trees. Recompute both sides; never compare
+  against a recorded number of unknown provenance.
+- **Compare the Git trees, not the working directory.** Export each side with
+  `git archive` and build in a clean directory. What CI checks out is the tree,
+  and the working directory can contain untracked files that mask a difference
+  either way.
+
+This is why the timestamp proofs anchor `content/` sources rather than build
+output. The original reason was "output is determined by input" — a deduction.
+The measured reason is stronger: **the output is not stable, so it is unfit to
+anchor.** Had `_site/` been stamped, the proof would fail verification after
+every rebuild, and the cause (one RSS timestamp) would be the last thing anyone
+suspected.
+
+## Provenance of the template demo material
+
+The Tufted template shipped 26 demo files — a sample CV, template
+documentation, and three example posts. They were never part of this site's
+content. On 2026-08-26 they were removed from Git tracking and added to
+`.gitignore`; they remain on the author's local disk as reference, and are
+deliberately excluded from the remote tree and therefore from the Zenodo
+archive (which snapshots the tree at release, not history).
+
+**Searching history for these paths requires care.** All 26 existed in the
+initial commit `d136d14`, but under *un-prefixed* names — `content/CV/`,
+`content/Docs/`, `content/Blog/2025-…`. The underscore prefixes were introduced
+in `eef5ab7`, the publish commit. A search for `content/_CV/` finds nothing
+before `eef5ab7` and would suggest, wrongly, that the files were added late.
+
+They contain no identifying information for this site's author: 0 files mention
+their name or email, and the only email-shaped strings are
+`example@example.com` and `noreply@edwardtufte.com`.
+
+## The unit of checking decides the blind spot
+
+Every blind spot found during the first publish had the same mechanism. None
+was caused by checking carelessly; each was caused by the *unit* the check was
+framed around, which put the contradiction structurally outside it:
+
+| Unit of checking | What became invisible |
+|---|---|
+| the page | disagreement *between* pages — the blog list said `2026-08-24` while the article, feed, and every meta tag said `2026-08-25` |
+| the local build | the difference between local output and what is actually served — Pages was set to `legacy` and served a Jekyll render for 14 minutes |
+| the changed files | unchanged files that would nonetheless be archived — the template demo material |
+| the file's content | an error in the *record about* the file — a wrong hash written into notes |
+
+**Checking harder never closes a gap of this kind.** If the contradiction lies
+between two units, no amount of care applied inside either one can reach it.
+The only move that works is to re-ask the question with a different unit:
+compare fact against fact rather than page against itself; compare served
+bytes rather than built bytes; compare the whole archived tree rather than the
+diff; compare the record against the thing it describes.
+
+`preflight.py`'s `cross_surface_report()` implements the first of these: it
+gathers every surface that states a given fact — publication date, author,
+canonical URL — and prints them together, so a disagreement between files
+cannot hide inside a file that is internally consistent.
+
+Two rules that section follows, both load-bearing:
+
+- **A value that cannot be found prints `MISSING`, never nothing.** A checker
+  that silently drops a surface is worse than one that never covered it, because
+  it still looks like it is working.
+- **Fields that legitimately differ are excluded and labelled, not compared.**
+  `sitemap <lastmod>` comes from file mtime and equals the build date by design;
+  comparing it would raise a disagreement on every run.
+

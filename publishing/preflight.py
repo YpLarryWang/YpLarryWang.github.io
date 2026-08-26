@@ -52,6 +52,112 @@ def line(label: str, value) -> None:
     print(f"  {label:<34} {value}")
 
 
+MONTHS = {m: i for i, m in enumerate(
+    "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), start=1)}
+
+
+def iso_date(raw: str | None) -> str | None:
+    """Reduce any of the date spellings this site emits to YYYY-MM-DD."""
+    if not raw:
+        return None
+    raw = raw.strip()
+    m = re.search(r"(\d{4})[-/](\d{2})[-/](\d{2})", raw)
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    # RFC 822, as used by RSS: "Tue, 25 Aug 2026 00:00:00 +0000"
+    m = re.search(r"(\d{1,2})\s+([A-Z][a-z]{2})\s+(\d{4})", raw)
+    if m and m.group(2) in MONTHS:
+        return f"{m.group(3)}-{MONTHS[m.group(2)]:02d}-{int(m.group(1)):02d}"
+    # Typst source: datetime(year: 2026, month: 8, day: 24)
+    m = re.search(r"year:\s*(\d{4}).*?month:\s*(\d{1,2}).*?day:\s*(\d{1,2})", raw, re.S)
+    if m:
+        return f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    return None
+
+
+def first(pattern: str, text: str, flags=0) -> str | None:
+    m = re.search(pattern, text, flags)
+    return m.group(1) if m else None
+
+
+def cross_surface_report() -> None:
+    """One fact, every surface that states it, side by side.
+
+    Exists because a whole class of error is invisible to per-page checking:
+    the article page can be perfectly self-consistent while the listing that
+    links to it disagrees, because the two are generated from *different*
+    files with nothing enforcing equality. That is exactly how the blog list
+    came to show 2026-08-24 while every other surface said 2026-08-25.
+
+    So the unit of checking is the FACT, not the page. Anything asserted in
+    more than one place is gathered here and printed together.
+
+    A value that cannot be found prints as MISSING rather than being skipped:
+    a check that silently drops a surface is how a surface stops being
+    checked at all.
+    """
+    post = SITE / "Blog" / POST_DIR / "index.html"
+    listing = SITE / "Blog" / "index.html"
+    feed = SITE / "feed.xml"
+    catalog = CONTENT / "Blog" / "posts.typ"
+
+    page = post.read_text(encoding="utf-8") if post.is_file() else ""
+    lst = listing.read_text(encoding="utf-8") if listing.is_file() else ""
+    rss = feed.read_text(encoding="utf-8") if feed.is_file() else ""
+    cat = catalog.read_text(encoding="utf-8") if catalog.is_file() else ""
+
+    print("\nCROSS-SURFACE AGREEMENT  (same fact, every place it is stated)")
+
+    dates = {
+        "article meta date": iso_date(first(r'<meta name="date" content="([^"]+)"', page)),
+        "article:published_time": iso_date(first(r'article:published_time"\s+content="([^"]+)"', page)),
+        "citation_publication_date": iso_date(first(r'citation_publication_date"\s+content="([^"]+)"', page)),
+        "byline <time>": iso_date(first(r'<time datetime="([^"]+)"', page)),
+        "feed <pubDate>": iso_date(first(r"<pubDate>([^<]+)</pubDate>", rss)),
+        "blog listing (rendered)": iso_date(first(r"(\d{4}-\d{2}-\d{2})", lst)),
+        "posts.typ catalog entry": iso_date(first(r"date:\s*(datetime\([^)]*\))", cat)),
+    }
+    for label, value in dates.items():
+        line(label, value if value else "MISSING — locate it before trusting this row")
+
+    distinct = sorted({v for v in dates.values() if v})
+    line("distinct values above", f"{len(distinct)}  {distinct}")
+
+    # sitemap <lastmod> is deliberately NOT compared above. It is derived from
+    # file mtime, so in CI it equals the build date and legitimately differs
+    # from the publication date. Listing it as a disagreement would produce an
+    # alarm that fires on every run, and an always-firing alarm trains the
+    # reader to skim past the real ones.
+    sitemap = SITE / "sitemap.xml"
+    if sitemap.is_file():
+        stamps = sorted(set(re.findall(r"<lastmod>([^<]+)</lastmod>",
+                                       sitemap.read_text(encoding="utf-8"))))
+        line("sitemap lastmod (mtime)", f"{stamps}  — build date by design, not a publication claim")
+
+    authors = {
+        "meta author": first(r'<meta name="author" content="([^"]+)"', page),
+        "article:author": first(r'article:author"\s+content="([^"]+)"', page),
+        "citation_author": first(r'citation_author"\s+content="([^"]+)"', page),
+        "byline (rendered)": (has_class(page, "byline-author") or [None])[0],
+    }
+    for label, value in authors.items():
+        line(label, value if value else "MISSING — locate it before trusting this row")
+    line("distinct values above", sorted({v for v in authors.values() if v}))
+
+    urls = {
+        "canonical": first(r'<link rel="canonical" href="([^"]+)"', page),
+        "og:url": first(r'og:url"\s+content="([^"]+)"', page),
+        "citation_public_url": first(r'citation_public_url"\s+content="([^"]+)"', page),
+        "feed <link>": first(rf"<link>([^<]*{POST_DIR}[^<]*)</link>", rss),
+        "feed <guid>": first(rf"<guid[^>]*>([^<]*{POST_DIR}[^<]*)</guid>", rss),
+        "sitemap <loc>": first(rf"<loc>([^<]*{POST_DIR}[^<]*)</loc>",
+                               sitemap.read_text(encoding="utf-8") if sitemap.is_file() else ""),
+    }
+    for label, value in urls.items():
+        line(label, value if value else "MISSING — locate it before trusting this row")
+    line("distinct values above", len({v.rstrip("/") for v in urls.values() if v}))
+
+
 def main() -> int:
     post = SITE / "Blog" / POST_DIR / "index.html"
     if not post.is_file():
@@ -218,6 +324,8 @@ def main() -> int:
     line("assets with content hash", len(versioned))
     line("assets WITHOUT hash", f"{len(unversioned)}  {unversioned if unversioned else ''}")
     line("et-book font dir present", (SITE / "assets" / "et-book").is_dir())
+
+    cross_surface_report()
 
     print("\nNo verdict is printed by design. Compare the rows above and decide.\n")
     return 0
